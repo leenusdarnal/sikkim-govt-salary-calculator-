@@ -72,7 +72,7 @@
         <div class="total"><span>Gross amount</span><strong>{money(calculation.gross)}</strong></div>
         <div><span>Deductions</span><strong>− {money(calculation.deductions)}</strong></div>
       </div>
-      <div class="net-row"><span>Estimated net</span><strong>{money(net)}</strong></div>
+      <div class="net-row"><span>Estimated net</span><strong>{money(calculation.net)}</strong></div>
       <button type="button" class="reset" onclick={() => { basicPay = 0; allowances = 0; deductions = 0; }}>Clear amounts</button>
     </aside>
   </section>
