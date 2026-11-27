@@ -1,0 +1,86 @@
+name: Generate npm lockfile (one-time)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: New branch to receive the generated package-lock.json
+        required: true
+        type: string
+        default: chore/dependency-lockfile
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-lockfile-${{ inputs.target_branch }}
+  cancel-in-progress: false
+
+jobs:
+  generate-lockfile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Validate dispatch and target branch
+        env:
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+
+          if [ "$GITHUB_REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
+            echo "::error::Run this one-time workflow from the default branch ($DEFAULT_BRANCH)."
+            exit 1
+          fi
+
+          if [[ "$TARGET_BRANCH" != chore/* ]]; then
+            echo "::error::The target branch must start with chore/."
+            exit 1
+          fi
+
+          git check-ref-format --branch "$TARGET_BRANCH"
+
+          if git ls-remote --exit-code --heads origin "refs/heads/$TARGET_BRANCH" >/dev/null 2>&1; then
+            echo "::error::Target branch already exists: $TARGET_BRANCH"
+            exit 1
+          fi
+
+          if [ -f package-lock.json ]; then
+            echo "::error::package-lock.json already exists on the default branch; refusing to regenerate it."
+            exit 1
+          fi
+
+      - name: Generate package-lock.json
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Verify clean reproducible install
+        run: |
+          set -euo pipefail
+          test -s package-lock.json
+          npm ci --no-audit --no-fund
+          npm run check
+          npm test
+          npm audit --audit-level=high
+          npm run build
+
+      - name: Commit lockfile to a new branch
+        env:
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+        run: |
+          set -euo pipefail
+          git switch --create "$TARGET_BRANCH"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- package-lock.json
+          git commit -m "chore(deps): generate npm package lock"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
