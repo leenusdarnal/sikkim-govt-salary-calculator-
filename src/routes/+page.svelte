@@ -51,20 +51,23 @@
       </div>
 
       <label for="basic-pay">Basic pay <span>₹</span></label>
-      <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" placeholder="e.g. 56000" />
+      <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" aria-invalid={basicPay < 0} aria-describedby={basicPay < 0 ? "basic-pay-error" : undefined} placeholder="e.g. 56000" />
+      {#if basicPay < 0}<p class="field-error" id="basic-pay-error">Enter zero or a positive amount.</p>{/if}
 
       <label for="allowances">Total allowances <span>₹</span></label>
-      <input id="allowances" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={allowances} inputmode="decimal" placeholder="Enter your allowance total" />
+      <input id="allowances" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={allowances} inputmode="decimal" aria-invalid={allowances < 0} aria-describedby={allowances < 0 ? "allowances-error" : undefined} placeholder="Enter your allowance total" />
+      {#if allowances < 0}<p class="field-error" id="allowances-error">Enter zero or a positive amount.</p>{/if}
 
       <label for="deductions">Total deductions <span>₹</span></label>
-      <input id="deductions" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={deductions} inputmode="decimal" placeholder="Enter your deduction total" />
+      <input id="deductions" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={deductions} inputmode="decimal" aria-invalid={deductions < 0} aria-describedby={deductions < 0 ? "deductions-error" : undefined} placeholder="Enter your deduction total" />
+      {#if deductions < 0}<p class="field-error" id="deductions-error">Enter zero or a positive amount.</p>{/if}
 
       <p class="helper">Use amounts from your own pay details. Leave a field at zero if it does not apply.</p>
     </div>
 
-    <aside class="result-panel" aria-live="polite" aria-atomic="true">
+    <aside class="result-panel">
       <p class="result-label">Estimated take-home</p>
-      <p class="net-amount">{money(calculation.net)}</p>
+      <p class="net-amount" aria-live="polite" aria-atomic="true">{money(calculation.net)}</p>
       <p class="result-caption">Monthly · based only on the values entered</p>
       <div class="breakdown">
         <div><span>Basic pay</span><strong>{money(calculation.basicPay)}</strong></div>
@@ -117,6 +120,7 @@
   input:focus { border-color: #377b68; box-shadow: 0 0 0 3px rgb(55 123 104 / 14%); background: white; }
   input::placeholder { color: #9aa69f; }
   .helper { margin: 17px 0 0; color: #78877f; font-size: 12px; }
+  .field-error { margin: 6px 0 0; color: #a12f2f; font-size: 12px; }
   .result-panel { display: flex; flex-direction: column; padding: clamp(22px, 4vw, 36px); background: #173b34; color: white; }
   .result-label { margin: 0; color: #c4d9d0; font-size: 13px; font-weight: 650; }
   .net-amount { margin: 7px 0 0; font-size: clamp(30px, 4vw, 42px); font-weight: 760; letter-spacing: -.04em; overflow-wrap: anywhere; }
