@@ -1,11 +1,11 @@
 <script lang="ts">
+  import { calculateSalary } from '$lib/salary-calculation.js';
+
   let basicPay = 0;
   let allowances = 0;
   let deductions = 0;
 
-  $: gross = Math.max(0, Number(basicPay) || 0) + Math.max(0, Number(allowances) || 0);
-  $: totalDeductions = Math.min(gross, Math.max(0, Number(deductions) || 0));
-  $: net = gross - totalDeductions;
+  $: calculation = calculateSalary({ basicPay, allowances, deductions });
 
   const money = (value: number) =>
     new Intl.NumberFormat('en-IN', {
@@ -64,13 +64,13 @@
 
     <aside class="result-panel" aria-live="polite" aria-atomic="true">
       <p class="result-label">Estimated take-home</p>
-      <p class="net-amount">{money(net)}</p>
+      <p class="net-amount">{money(calculation.net)}</p>
       <p class="result-caption">Monthly · based only on the values entered</p>
       <div class="breakdown">
-        <div><span>Basic pay</span><strong>{money(Math.max(0, Number(basicPay) || 0))}</strong></div>
-        <div><span>Allowances</span><strong>{money(Math.max(0, Number(allowances) || 0))}</strong></div>
-        <div class="total"><span>Gross amount</span><strong>{money(gross)}</strong></div>
-        <div><span>Deductions</span><strong>− {money(totalDeductions)}</strong></div>
+        <div><span>Basic pay</span><strong>{money(calculation.basicPay)}</strong></div>
+        <div><span>Allowances</span><strong>{money(calculation.allowances)}</strong></div>
+        <div class="total"><span>Gross amount</span><strong>{money(calculation.gross)}</strong></div>
+        <div><span>Deductions</span><strong>− {money(calculation.deductions)}</strong></div>
       </div>
       <div class="net-row"><span>Estimated net</span><strong>{money(net)}</strong></div>
       <button type="button" class="reset" onclick={() => { basicPay = 0; allowances = 0; deductions = 0; }}>Clear amounts</button>
