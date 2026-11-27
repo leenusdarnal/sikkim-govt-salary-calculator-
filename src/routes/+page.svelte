@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { calculateSalary } from '#lib/salary-calculation.js';
+  import { calculateSalary } from '../lib/salary-calculation.js';
 
   let basicPay = 0;
   let allowances = 0;
