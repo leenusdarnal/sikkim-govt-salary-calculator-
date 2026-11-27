@@ -51,13 +51,13 @@
       </div>
 
       <label for="basic-pay">Basic pay <span>₹</span></label>
-      <input id="basic-pay" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" placeholder="e.g. 56000" />
+      <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" placeholder="e.g. 56000" />
 
       <label for="allowances">Total allowances <span>₹</span></label>
-      <input id="allowances" type="number" min="0" step="1" bind:value={allowances} inputmode="decimal" placeholder="Enter your allowance total" />
+      <input id="allowances" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={allowances} inputmode="decimal" placeholder="Enter your allowance total" />
 
       <label for="deductions">Total deductions <span>₹</span></label>
-      <input id="deductions" type="number" min="0" step="1" bind:value={deductions} inputmode="decimal" placeholder="Enter your deduction total" />
+      <input id="deductions" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={deductions} inputmode="decimal" placeholder="Enter your deduction total" />
 
       <p class="helper">Use amounts from your own pay details. Leave a field at zero if it does not apply.</p>
     </div>
@@ -73,7 +73,7 @@
         <div><span>Deductions</span><strong>− {money(calculation.deductions)}</strong></div>
       </div>
       <div class="net-row"><span>Estimated net</span><strong>{money(calculation.net)}</strong></div>
-      <button type="button" class="reset" onclick={() => { basicPay = 0; allowances = 0; deductions = 0; }}>Clear amounts</button>
+      <button type="button" class="reset focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onclick={() => { basicPay = 0; allowances = 0; deductions = 0; }}>Clear amounts</button>
     </aside>
   </section>
 
