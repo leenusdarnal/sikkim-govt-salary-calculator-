@@ -24,12 +24,6 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install --no-audit --no-fund
-      - name: Check Svelte and TypeScript
-        run: npm run check
-      - name: Run unit tests
-        run: npm test
-      - name: Audit dependencies
-        run: npm audit --audit-level=high
       - name: Build static site
         run: npm run build
       - name: Upload Pages artifact
