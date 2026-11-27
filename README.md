@@ -45,7 +45,7 @@ The calculator is an informational tool, not a government payroll system. Offici
 
 The baseline legal source located is the [Sikkim Government Services (Revised Pay) Rules, 2018, Gazette No. 333](https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf), Notification No. 56/GEN/DOP dated 23 June 2018. The rules are deemed effective from 1 January 2016 and contain the Government Pay Matrix in Schedule Part A and specified-post upgraded Levels in Part B.
 
-The [State Bank of Sikkim Pay Matrix, Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) is also recorded as an official cross-reference. It displays a selected subset of 16 Levels; it is not a complete reproduction of all Levels in Gazette Part A. The two sources are being kept separately identified until a full cell-by-cell comparison is complete.
+The [State Bank of Sikkim Pay Matrix, Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) is an officially published State Bank pay-matrix document. It displays 16 Levels, while Gazette Schedule Part A displays the wider Government matrix with 23 Levels. The overlapping Level, Grade Pay and entry-pay headings are recorded separately in the source audit; a full cell-by-cell comparison and employee-category applicability check are still pending.
 
 See [the pay matrix source audit](docs/PAY_MATRIX_SOURCE_AUDIT.md) and [the pay rules register](docs/PAY_RULES_REGISTER.md) for the source transcription, applicability findings and outstanding verification work. No DA, HRA, GIS, NPS, professional tax or other current allowance/deduction rate is asserted by this repository.
 
