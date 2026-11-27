@@ -21,6 +21,7 @@ News reports, third-party calculators, social posts and informal messages may he
 |---|---|---|
 | [Department of Personnel — Revision of Pay](https://www.sikkim.gov.in/departments/department-of-personnel-public-grievances/revision-of-pay) | Locate pay-revision orders and related documents | Source location identified; individual orders still need review |
 | [Finance Department — Notifications](http://www.sikkimfred.gov.in/Notification/Notification_Main_Page.aspx) | Locate Finance Department notifications and circulars | Source archive identified; relevant notifications still need review |
+| [Government of Sikkim — Official Portal](https://www.sikkim.gov.in/) | Discover official department pages, government notices and additional primary-source locations | Official portal identified; relevant salary/pay orders still need to be located and reviewed |
 
 The links above are starting points, not confirmation of any particular rate.
 
