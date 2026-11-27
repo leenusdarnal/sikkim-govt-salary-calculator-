@@ -33,9 +33,42 @@ The rule also lists exclusions, including persons not in whole-time employment, 
 
 The notes to Rule 2 separately address work-charged establishment drawing pay in the existing Pay Band and Grade Pay, and persons who ceased to be in service on account of death, retirement or otherwise on or after 1 January 2016. These notes must be preserved when defining employee eligibility.
 
+## 2. Gazette Part A: complete Level / Grade Pay / entry-pay headings
+
+The Schedule, Part A in the Gazette displays all 23 Government Pay Levels. The following table transcribes the column headings and first cell (entry pay) visible on printed pages 12–14. This is a header/entry-pay transcription only; the remaining cells still require a full independent cell-by-cell comparison.
+
+| Pay Level | Grade Pay (₹) | Cell 1 / entry pay (₹) |
+|---:|---:|---:|
+| 1 | 1,400 | 15,200 |
+| 2 | 1,800 | 16,200 |
+| 3 | 2,300 | 19,300 |
+| 4 | 2,200 | 18,000 |
+| 5 | 2,300 | 19,400 |
+| 6 | 2,400 | 20,300 |
+| 7 | 2,600 | 21,700 |
+| 8 | 2,700 | 22,800 |
+| 9 | 3,000 | 25,400 |
+| 10 | 3,400 | 30,200 |
+| 11 | 3,800 | 33,700 |
+| 12 | 4,200 | 37,100 |
+| 13 | 4,400 | 37,600 |
+| 14 | 4,600 | 39,100 |
+| 15 | 5,000 | 46,300 |
+| 16 | 5,400 | 49,700 |
+| 17 | 6,200 | 56,000 |
+| 18 | 6,700 | 65,000 |
+| 19 | 7,200 | 71,100 |
+| 20 | 8,700 | 83,700 |
+| 21 | 9,000 | 105,400 |
+| 22 | 9,500 | 120,500 |
+| 23 | 10,000 | 124,700 |
+
+The source schedule includes 40 cells in the lower-level columns and progressively fewer cells in several higher-level columns. The actual column lengths must be retained; blank cells are not valid pay values.
+
 ## 2. State Bank of Sikkim Pay Matrix reference
 
 - Document title: *State Bank of Sikkim — Pay Matrix, Annexure-I*
+- Source status: an officially published State Bank of Sikkim pay-matrix document.
 - Official source: https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf
 - Format: two-page matrix showing Pay Band, Grade Pay, Pay Level, entry pay and cell values.
 
@@ -62,7 +95,7 @@ The State Bank PDF presents these 16 Levels:
 
 These headings and entry-pay figures are transcribed from the State Bank PDF. The displayed levels form a selected subset; the PDF does not display every Level in Gazette Part A. In particular, Gazette Part A also includes Levels 1, 2, 3, 8, 13, 18 and 23. A calculator intended for the full Government of Sikkim employee population must not silently treat the State Bank PDF's 16-level presentation as an exhaustive replacement for the Gazette schedule.
 
-The selected Level/Grade Pay/entry-pay combinations above correspond to columns in Gazette Part A. The State Bank PDF is retained as a separately identified official cross-reference; the Gazette remains the legal source for the Government rules and its complete Schedule, Part A. A full cell-by-cell comparison of the two PDFs is still required before calling the State Bank transcription interchangeable with the Gazette matrix.
+The State Bank PDF is an official State Bank of Sikkim matrix publication, and its displayed Level/Grade Pay/entry-pay combinations correspond to the matching columns in Gazette Part A. The Gazette separately contains the full Government schedule, while the Bank PDF shows 16 selected Levels. Both sources are retained as distinct official source records. A full cell-by-cell comparison and confirmation of the intended employee categories are still required before treating the two datasets as interchangeable for a particular calculator scenario.
 
 ## 3. Part B: specified upgraded posts
 
