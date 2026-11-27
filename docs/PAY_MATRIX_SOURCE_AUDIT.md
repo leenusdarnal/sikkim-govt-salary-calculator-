@@ -131,7 +131,7 @@ A Department of Personnel clarification titled **Effect of EOL on the date of an
 
 | Dataset | Status | Next verification step |
 |---|---|---|
-| Gazette Part A level headings and Grade Pay mapping | Source reviewed | Independently check every heading against the page images |
+| Gazette Part A level headings, Grade Pay mapping and Cell 1 | Initial transcription complete | Independent second check against the page images |
 | Gazette Part A cell values | Not yet fully transcribed | Transcribe all Levels 1–23 and verify each cell |
 | State Bank Annexure-I headings and entry pay | Initial transcription complete | Independently compare every Level and every cell with the published PDF |
 | Gazette Part B specified-post upgrades | Initial Excise rows transcribed | Review all other departments and obtain later orders affecting individual posts |
