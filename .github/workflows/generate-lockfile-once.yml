@@ -1,0 +1,70 @@
+name: Generate npm lockfile (one-time)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-lockfile
+  cancel-in-progress: false
+
+jobs:
+  generate-lockfile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Validate one-time run
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+
+          if [ "$GITHUB_REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
+            echo "::error::Run this one-time workflow from the default branch ($DEFAULT_BRANCH)."
+            exit 1
+          fi
+
+          if git ls-remote --exit-code --heads origin "refs/heads/chore/dependency-lockfile" >/dev/null 2>&1; then
+            echo "::error::The output branch chore/dependency-lockfile already exists; this workflow is one-time only."
+            exit 1
+          fi
+
+          if [ -f package-lock.json ]; then
+            echo "::error::package-lock.json already exists on the default branch; refusing to regenerate it."
+            exit 1
+          fi
+
+      - name: Generate package-lock.json
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Verify clean reproducible install
+        run: |
+          set -euo pipefail
+          test -s package-lock.json
+          npm ci --no-audit --no-fund
+          npm run check
+          npm test
+          npm audit --audit-level=high
+          npm run build
+
+      - name: Commit lockfile to its dedicated branch
+        run: |
+          set -euo pipefail
+          git switch --create chore/dependency-lockfile
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- package-lock.json
+          git commit -m "chore(deps): generate npm package lock"
+          git push origin "HEAD:refs/heads/chore/dependency-lockfile"

@@ -2,9 +2,9 @@
 
 A transparent, source-backed salary calculator designed for employees of the Government of Sikkim.
 
-The project aims to help employees estimate monthly salary, understand pay components and deductions, explore pay-matrix progression, and generate a clear salary statement. Calculations will be driven by documented rules and effective dates rather than values hard-coded into the interface.
+The application currently provides an early manual-arithmetic preview. The project is adding the applicable pay matrix and salary rules only after they have been traced to official documents, checked for employee applicability and independently tested.
 
-> **Project status:** Planning and rules verification. No salary rate or deduction should be treated as confirmed until it is supported by the applicable Government of Sikkim order or an authoritative official source.
+> **Project status:** early implementation. The current preview is not an official salary calculation. No allowance or deduction rate should be treated as confirmed until supported by the applicable order.
 
 ## Project goals
 
@@ -18,46 +18,53 @@ The project aims to help employees estimate monthly salary, understand pay compo
 ## Planned modules
 
 1. **Pay matrix** — pay levels, cells and basic-pay lookup.
-2. **Salary calculator** — basic pay, applicable allowances, gross pay, deductions and estimated net pay.
+2. **Salary calculator** — basic pay, applicable allowances, gross pay, deductions and estimated net salary.
 3. **Employee scenario** — only the minimum inputs needed for a calculation; no employee ID or bank details.
 4. **Increment and promotion** — estimate pay movement under verified rules.
 5. **Arrears and revisions** — compare two rule/pay periods using verified effective dates.
 6. **Salary statement** — printable/downloadable breakdown with calculation notes.
 7. **Rules library** — source orders, effective dates, applicability and verification status.
 
-## Technology direction
+## Design and user experience
+
+The UI uses *Refactoring UI* as its design foundation: feature-first layouts, strong visual hierarchy, consistent spacing and typography, restrained colours, readable forms, accessible states and clear feedback. The design should make the next useful action obvious without decorating or overcomplicating the calculator.
+
+## Technology
 
 - SvelteKit
 - TypeScript
 - Tailwind CSS
-- Vitest for calculation and rule tests
-- Playwright for key user journeys
-- Cloudflare Pages/Workers as the preferred low-cost hosting direction, subject to deployment requirements
+- Node's built-in test runner for calculation tests
+- GitHub Actions for pull-request validation and GitHub Pages deployment
 
-The first release should be client-side and should not require an account or send personal salary inputs to a server. Hosting and deployment configuration will be added after the project scaffold is selected.
+The first release is client-side and should not require an account or send personal salary inputs to a server. Hosting and deployment configuration can evolve as project requirements are confirmed.
 
 ## Accuracy and official sources
 
 The calculator is an informational tool, not a government payroll system. Official orders and notifications take precedence over the calculator.
 
-Initial official source locations to review:
+The baseline legal source located is the [Sikkim Government Services (Revised Pay) Rules, 2018, Gazette No. 333](https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf), Notification No. 56/GEN/DOP dated 23 June 2018. The rules are deemed effective from 1 January 2016 and contain the Government Pay Matrix in Schedule Part A and specified-post upgraded Levels in Part B.
 
-- [Department of Personnel — Revision of Pay](https://www.sikkim.gov.in/departments/department-of-personnel-public-grievances/revision-of-pay)
-- [Finance Department — Notifications](http://www.sikkimfred.gov.in/Notification/Notification_Main_Page.aspx)
+The [State Bank of Sikkim Pay Matrix, Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) is an officially published State Bank pay-matrix document. It displays 16 Levels, while Gazette Schedule Part A displays the wider Government matrix with 23 Levels. The overlapping Level, Grade Pay and entry-pay headings are recorded separately in the source audit; a full cell-by-cell comparison and employee-category applicability check are still pending.
 
-The source register in [docs/PAY_RULES_REGISTER.md](docs/PAY_RULES_REGISTER.md) tracks what has been found, what remains to be verified, and what evidence is required before implementation. No current DA, HRA, GIS, NPS, professional tax or other rate is asserted by this repository at this stage.
+See [the pay matrix source audit](docs/PAY_MATRIX_SOURCE_AUDIT.md) and [the pay rules register](docs/PAY_RULES_REGISTER.md) for the source transcription, applicability findings and outstanding verification work. No DA, HRA, GIS, NPS, professional tax or other current allowance/deduction rate is asserted by this repository.
+
+## Development
+
+Install dependencies and run the local preview with npm install and npm run dev.
+
+Run project checks with npm run check, npm test and npm run build.
+
+A one-time GitHub Actions workflow is being added to generate a package-lock file from the declared package manifest, verify an npm ci install, and publish the lockfile on a separate branch. After the generated file is committed, the CI and Pages workflows will switch from npm install to npm ci.
 
 ## Project documents
 
 - [Product plan](docs/PRODUCT_PLAN.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Pay rules and source register](docs/PAY_RULES_REGISTER.md)
+- [Pay matrix source audit](docs/PAY_MATRIX_SOURCE_AUDIT.md)
 - [Contribution guide](CONTRIBUTING.md)
-
-## Development
-
-The application scaffold has not yet been added. Once the initial technical setup is committed, this section will contain the exact install, development, test and build commands.
 
 ## Disclaimer
 
-This project is independent and is not an official Government of Sikkim application. Results are estimates for informational use and must be checked against the applicable government orders, department instructions and official salary records. Do not enter confidential employee, banking or identity information.
+This project is independent and is not an official Government of Sikkim application. Results are estimates for informational use and must be checked against applicable government orders, department instructions and official salary records. Do not enter confidential employee, banking or identity information.
