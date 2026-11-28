@@ -3,6 +3,7 @@
   import { calculateSalary } from '../lib/salary-calculation.js';
   import { getPayCell, getPayLevel, PAY_LEVELS } from '../lib/pay-matrix.js';
   import { POST_MAPPING_GROUPS, getPostMapping } from '../lib/post-level-mappings.js';
+  import { APPLICABILITY_GUIDANCE } from '../lib/applicability-guidance.js';
   import { nextTheme, resolveTheme } from '../lib/theme.js';
   import { createManualEstimateStatement, hasValidManualEstimateInputs } from '../lib/estimate-statement.js';
 
@@ -231,6 +232,43 @@
         </div>
       </details>
 
+      <section class="applicability-guidance" aria-labelledby="applicability-title">
+        <div class="matrix-heading">
+          <div>
+            <p class="eyebrow">Later Department of Personnel orders</p>
+            <h3 id="applicability-title">Special employee pathways</h3>
+          </div>
+          <span class="matrix-badge">3 source notes</span>
+        </div>
+        <p class="applicability-intro">Some employees follow separate regularisation, cadre-induction or increment instructions. These references are not automatic eligibility decisions.</p>
+        {#each APPLICABILITY_GUIDANCE as guidance (guidance.id)}
+          <details class="applicability-item">
+            <summary>
+              <span>{guidance.title}</span>
+              <small>{guidance.sourceDate}</small>
+            </summary>
+            <div class="applicability-content">
+              <p class="applicability-source"><strong>{guidance.sourceLabel}</strong> · {guidance.sourceKind}</p>
+              <p><strong>Who the source addresses</strong></p>
+              <ul>
+                {#each guidance.applicability as item (item)}
+                  <li>{item}</li>
+                {/each}
+              </ul>
+              <p><strong>What the source says</strong></p>
+              <ol>
+                {#each guidance.stages as stage, index (index)}
+                  <li>{stage}</li>
+                {/each}
+              </ol>
+              <p class="applicability-status">{guidance.status}</p>
+              <p class="applicability-caution">{guidance.caution}</p>
+              <a href={guidance.sourceUrl} target="_blank" rel="noreferrer">Open official source ↗</a>
+            </div>
+          </details>
+        {/each}
+      </section>
+
       <label for="basic-pay">Basic pay <span>₹</span></label>
       <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" aria-invalid={!Number.isFinite(basicPay) || basicPay < 0} aria-describedby={!Number.isFinite(basicPay) || basicPay < 0 ? "basic-pay-error" : undefined} placeholder="e.g. 56000" />
       {#if !Number.isFinite(basicPay) || basicPay < 0}<p class="field-error" id="basic-pay-error">Enter a valid, non-negative amount.</p>{/if}
@@ -361,6 +399,21 @@
   .rules-coverage-content li { margin: 4px 0; }
   .coverage-warning { padding-top: 9px; border-top: 1px solid #e0e8e3; font-weight: 650; }
 
+  .applicability-guidance { margin: 0 0 25px; padding: 16px; border: 1px solid #dce6e0; border-radius: 12px; background: #f8faf9; }
+  .applicability-intro { margin: 9px 0 12px; color: #64776e; font-size: 12px; }
+  .applicability-item { padding: 10px 0; border-top: 1px solid #dce6e0; }
+  .applicability-item summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #24483e; font-size: 12px; font-weight: 750; cursor: pointer; }
+  .applicability-item summary:focus-visible { outline: 2px solid #377b68; outline-offset: 3px; }
+  .applicability-item summary small { color: #788a81; font-size: 10px; font-weight: 650; white-space: nowrap; }
+  .applicability-content { padding: 8px 0 4px; color: #586d63; font-size: 11px; }
+  .applicability-content p { margin: 9px 0 6px; }
+  .applicability-content ul, .applicability-content ol { margin: 6px 0 10px; padding-left: 20px; }
+  .applicability-content li { margin: 5px 0; }
+  .applicability-source { color: #446a5c; }
+  .applicability-status { padding: 7px 9px; border-radius: 7px; background: #e7efeb; color: #345b4d; font-weight: 750; }
+  .applicability-caution { padding-top: 8px; border-top: 1px solid #e0e8e3; }
+  .applicability-content a { display: inline-block; margin-top: 5px; color: #1b6653; font-size: 11px; font-weight: 750; text-underline-offset: 3px; }
+
   h2 { margin: 0; font-size: 23px; line-height: 1.2; letter-spacing: -.03em; }
   .step { color: #87968f; font-size: 11px; font-weight: 750; letter-spacing: .08em; white-space: nowrap; }
   label { display: flex; justify-content: space-between; margin: 18px 0 7px; color: #314b42; font-size: 13px; font-weight: 700; }
@@ -456,6 +509,17 @@
   :global(html[data-theme="dark"]) .rules-coverage summary span { color: #8fa198; }
   :global(html[data-theme="dark"]) .rules-coverage-content { color: #afc1b6; }
   :global(html[data-theme="dark"]) .coverage-warning { border-color: #2d4237; }
+
+  :global(html[data-theme="dark"]) .applicability-guidance { border-color: #2d4237; background: #101b16; }
+  :global(html[data-theme="dark"]) .applicability-intro { color: #a2b6aa; }
+  :global(html[data-theme="dark"]) .applicability-item { border-color: #2d4237; }
+  :global(html[data-theme="dark"]) .applicability-item summary { color: #dce9e2; }
+  :global(html[data-theme="dark"]) .applicability-item summary small { color: #8fa198; }
+  :global(html[data-theme="dark"]) .applicability-content { color: #afc1b6; }
+  :global(html[data-theme="dark"]) .applicability-source { color: #9acbb4; }
+  :global(html[data-theme="dark"]) .applicability-status { background: #24382e; color: #c1e0ce; }
+  :global(html[data-theme="dark"]) .applicability-caution { border-color: #2d4237; }
+  :global(html[data-theme="dark"]) .applicability-content a { color: #8ed8bc; }
 
   @media print {
     @page { margin: 18mm; }

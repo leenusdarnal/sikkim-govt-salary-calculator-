@@ -22,11 +22,42 @@ News reports, third-party calculators, social posts and informal messages may he
 | [Sikkim Government Services (Revised Pay) Rules, 2018 — Gazette No. 333](https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf) | Notification No. 56/GEN/DOP, dated 23/06/2018; deemed effective from 01/01/2016; Rules 1–6, Schedule Part A (Levels 1–23), Part B (specified post upgrades) and Appendix C reviewed | Base rules and schedule located/reviewed; complete cell transcription and employee-category verification pending |
 | [State Bank of Sikkim Pay Matrix — Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) | Two-page table with Pay Band, Grade Pay, Level, entry pay and selected vertical cell values; displays 16 Levels | Initial headings/entry-pay transcription completed; full cell comparison with Gazette Part A pending |
 | [DOP Notification No. 109/GEN/DOP and OM No. 6412/GEN/DOP](https://dop.sikkim.gov.in/notificationdoc/109.pdf) | One-time induction measure for specified regular-establishment employees in Levels 1/2/3 who completed six years of regular service as on 31/12/2025; OM issued 25/09/2025 | Reviewed for employee-applicability context; does not amend matrix values |
-| [DOP clarification No. 6780/GEN/DOP](https://dop.sikkim.gov.in/circular/6780.pdf) | Clarification on effect of Extra Ordinary Leave on annual increment under the 2018 Revised Pay Rules | Located; date and complete applicability must be recorded before implementing increment logic |
+| Notification No. 99/GEN/DOP dated 06/02/2020 (cited by the 2026 OM) | Cited as the authority for regulating pay after five years of regular service following the regularisation pathway | Original notification not yet obtained; not implementation-ready |
+| [DOP Office Memorandum No. 2026/GEN/DOP](https://dop.sikkim.gov.in/notificationdoc/2026.pdf) | Dated 20/03/2026; sets a distinct pay progression for the four-year Group C/D category, eligible land-donor appointees and eligible temporary employees with benchmark disabilities: first year at temporary-capacity pay, next four years in applicable Level 1/2/3, and after five years under Notification No. 99/GEN/DOP | Source reviewed; downstream Notification No. 99 and referenced regularisation/scheme notifications still require review; not implemented in calculator |
+| [DOP clarification No. 6780/GEN/DOP](https://dop.sikkim.gov.in/circular/6780.pdf) | Dated 27/10/2025; clarifies EOL and annual increment dates (1 January / 1 July) where qualifying-service conditions are met | Source reviewed; individual qualifying-service treatment and edge cases require review; increment logic not implemented |
+
 
 ### Important distinction between the two matrix PDFs
 
 The Gazette contains the Government of Sikkim's full Schedule Part A with Levels 1–23 and a separate Part B for upgraded Levels for specified posts. The State Bank of Sikkim Annexure-I displays a selected subset of 16 Levels. The State Bank PDF is preserved as an official cross-reference, but it is not treated as an exhaustive replacement for the Gazette schedule. See [PAY_MATRIX_SOURCE_AUDIT.md](PAY_MATRIX_SOURCE_AUDIT.md) for the transcribed Level/Grade Pay/entry-pay cross-reference and the verification gaps.
+
+## Special employee-applicability pathways identified
+
+The following later Department of Personnel instruments must be considered separately from the general Part A matrix and the specified-post Part B table.
+
+### Office Memorandum No. 2026/GEN/DOP dated 20 March 2026
+
+The OM addresses regularised employees within three policy groups:
+
+1. Group C and D temporary employees covered by the four-year continuous-service regularisation policy under Notification No. 100/GEN/DOP read with No. 24/GEN/DOP.
+2. Persons appointed in lieu of land donated to the Government, after the prescribed three years of continuous temporary service and subject to the scheme under Notification No. 13/GEN/DOP.
+3. Temporary employees with benchmark disabilities covered by the two-year service policy in the particular post under Notification No. 68/GEN/DOP read with No. 25/GEN/DOP.
+
+The OM prescribes: (a) for the first year after regularisation, pay equivalent to the amount drawn in temporary capacity; (b) after successful completion of one year of regular service, placement in Level 1, 2 or 3 as applicable to the post for the next four years; and (c) on completion of five years of regular service, regulation under Notification No. 99/GEN/DOP dated 06/02/2020.
+
+**Implementation hold:** the original Notification No. 99/GEN/DOP and the referenced regularisation/scheme notifications must be obtained and reviewed. The OM does not provide the post-to-Level assignment or decide that an individual meets the regularisation criteria. This pathway is therefore displayed as a source note only and must not be used for automatic pay calculation.
+
+### Notification No. 109/GEN/DOP and OM No. 6412/GEN/DOP dated 25 September 2025
+
+The notification provides for one-time induction into the respective cadres/services for employees whose services had been brought into the regular establishment in Pay Levels 1, 2 or 3 and who completed six years of regular service as on 31/12/2025. The accompanying OM describes the seniority-list process, the claims/objections period, induction under the relevant cadre recruitment rules, and the requirement not to relax prescribed educational, technical or other qualifications.
+
+This is a cadre-induction measure, not a general revision of Part A cell values or an automatic promotion. Individual eligibility and cadre recruitment rules must be checked.
+
+### Clarification No. 6780/GEN/DOP dated 27 October 2025
+
+The clarification addresses the effect of EOL on annual increment under the 2018 Revised Pay Rules. It refers to the common increment dates of 1 January and 1 July, minimum qualifying service in the relevant Level during the increment cycle, and postponement where EOL is continuously availed for six months.
+
+The clarification is recorded as a source note only. Qualifying-service calculation and the employee's leave/service record must be checked before determining an individual increment date.
 
 ## Initial official source locations
 
@@ -44,8 +75,8 @@ The links above are starting points, not confirmation of any particular allowanc
 | Rule area | Information to verify | Status |
 |---|---|---|
 | Pay structure | Applicable pay rules, pay levels, cells, minimum/maximum and conversion/fixation rules | Base 2018 rules and Gazette matrix reviewed; full cell transcription and post applicability pending |
-| Employee applicability | Covered services/posts, exclusions, work-charged employees, post-specific upgrades and later induction measures | Base Rule 2 and Part B reviewed; individual category/cadre mapping pending |
-| Annual increment | Rate, date, eligibility, withholding and special cases | 2018 rules located; DOP EOL clarification located; full increment implementation research pending |
+| Employee applicability | Covered services/posts, exclusions, work-charged employees, post-specific upgrades and later induction/regularisation measures | Base Rule 2, Part B, 2025 one-time induction notification and 2026 regularisation OM reviewed; individual category/cadre mapping and underlying referenced notifications pending |
+| Annual increment | Rate, date, eligibility, withholding and special cases | DOP clarification No. 6780/GEN/DOP dated 27/10/2025 reviewed; qualifying-service and EOL edge-case treatment remains to be independently checked before implementation |
 | Dearness allowance | Rate by effective date, calculation base, rounding and arrears treatment | Pending |
 | House rent allowance | Rate, eligibility, location/category rules, exclusions and calculation base | Pending |
 | Other allowances | Names, amount/rate, eligibility, caps and effective dates | Pending |
