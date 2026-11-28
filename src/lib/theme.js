@@ -1,5 +1,3 @@
-const THEMES = new Set(['light', 'dark']);
-
 /**
  * Resolve a stored preference, falling back to the current system preference.
  * @param {unknown} savedTheme
@@ -7,7 +5,7 @@ const THEMES = new Set(['light', 'dark']);
  * @returns {'light' | 'dark'}
  */
 export function resolveTheme(savedTheme, systemTheme) {
-  if (THEMES.has(savedTheme)) return savedTheme;
+  if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
   return systemTheme === 'dark' ? 'dark' : 'light';
 }
 
