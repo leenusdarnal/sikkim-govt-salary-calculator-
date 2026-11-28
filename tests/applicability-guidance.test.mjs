@@ -10,9 +10,9 @@ test('includes the four reviewed DOP employee-applicability instruments', () => 
     APPLICABILITY_GUIDANCE.map(({ id }) => id),
     [
       'regularisation-pay-progression-2026',
+      'regularisation-original-pay-level-2020',
       'one-time-cadre-induction-2025',
-      'eol-increment-clarification-2025',
-      'regularisation-original-pay-level-2020'
+      'eol-increment-clarification-2025'
     ]
   );
   assert.equal(new Set(APPLICABILITY_GUIDANCE.map(({ id }) => id)).size, 4);
