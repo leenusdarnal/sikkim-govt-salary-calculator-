@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createManualEstimateStatement } from '../src/lib/estimate-statement.js';
+import { createManualEstimateStatement, hasValidManualEstimateInputs } from '../src/lib/estimate-statement.js';
 
 test('creates labelled statement lines from normalized calculation amounts', () => {
   const statement = createManualEstimateStatement({
@@ -48,4 +48,26 @@ test('labels the deduction amount as capped at gross pay', () => {
   assert.ok(deductionsLine, 'deductions line should exist');
   assert.equal(deductionsLine.label, 'Deductions (input, capped at gross pay)');
   assert.equal(deductionsLine.amount, 1500);
+});
+
+test('allows printing when all entered amounts are finite and non-negative', () => {
+  assert.equal(
+    hasValidManualEstimateInputs({ basicPay: 56000, allowances: 12000, deductions: 8500 }),
+    true
+  );
+});
+
+test('blocks printing when any amount is negative or non-finite', () => {
+  assert.equal(
+    hasValidManualEstimateInputs({ basicPay: -1, allowances: 12000, deductions: 8500 }),
+    false
+  );
+  assert.equal(
+    hasValidManualEstimateInputs({ basicPay: 56000, allowances: Number.NaN, deductions: 8500 }),
+    false
+  );
+  assert.equal(
+    hasValidManualEstimateInputs({ basicPay: 56000, allowances: 12000, deductions: Number.POSITIVE_INFINITY }),
+    false
+  );
 });
