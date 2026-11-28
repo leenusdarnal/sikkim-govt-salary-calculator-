@@ -8,7 +8,7 @@
 
 Use primary Government of Sikkim rules, Gazette notifications, orders, circulars and official departmental publications as the controlling evidence. Record the exact source title, issuing authority, number, issue date, effective date, applicable employee group, and page/clause/table.
 
-The 2018 Revised Pay Rules and Gazette Schedule are the baseline sources for the Government pay matrix. The State Bank of Sikkim Pay Matrix (Annexure-I) is a separate official publication and a cross-reference; it is not a substitute for the full Government schedule. Part B post upgrades are separate from the general Part A matrix.
+The 2018 Revised Pay Rules and Gazette Schedule are the baseline sources for the Government pay matrix. The State Bank of Sikkim Pay Matrix (Annexure-I) is a separate official publication and a cross-reference; it is not a substitute for the full Government schedule. Part B post upgrades are separate from the general Part A matrix. All 24 entries on printed page 15 have been transcribed into a reference-only lookup; a second independent check and review of later post-specific orders remain pending.
 
 Secondary reporting may help locate an official order, but is not sufficient evidence for implementing a rate. Never fill gaps by inference or silently reconcile sources that differ.
 
@@ -36,7 +36,7 @@ Preserve each Level's actual cell count. Blank cells are not values, and a short
 
 ### Gazette Part B — specified post upgrades
 
-Part B is a separate schedule of upgraded Levels for specified posts. Initial Excise (Abkari) rows have been transcribed in [PAY_MATRIX_SOURCE_AUDIT.md](PAY_MATRIX_SOURCE_AUDIT.md). These are not universal changes to every post with the same old Grade Pay. Before applying a mapping, verify the employee's cadre/post, appointment or promotion history, and any later order.
+Part B is a separate schedule of upgraded Levels for specified posts. All 24 entries on printed page 15, covering 11 service/department groupings, have been transcribed in [PAY_MATRIX_SOURCE_AUDIT.md](PAY_MATRIX_SOURCE_AUDIT.md) and exposed as a reference lookup. These are not universal changes to every post with the same old Grade Pay. Similar titles in different services are separate entries. Before applying a mapping, verify the employee's exact cadre/post, appointment or promotion history, and any later order. The lookup must not be treated as an individual eligibility decision.
 
 ### Other located DOP material
 
@@ -82,7 +82,7 @@ Manual basic-pay entry may be supported as a clearly labelled user-provided inpu
 | Gazette Part A headings and entry pay | Initial transcription | Independent check against page images |
 | Gazette Part A full cell data | Pending | Transcribe and verify all Levels/cells |
 | State Bank Annexure-I | Initial headings/entry pay | Compare every cell with Gazette Part A |
-| Part B post mappings | Initial Excise rows | Review relevant departments and later orders |
+| Part B post mappings | 24 printed-page entries transcribed; second check pending | Independently verify each entry and review later orders |
 | Employee applicability | Base Rule 2 reviewed | Define MVP groups and map cadre/post evidence |
 | Allowances and deductions | Pending | Locate primary orders and capture applicability/effective dates |
 | Increment/EOL treatment | Clarification located | Capture full details and applicability from original circular |
