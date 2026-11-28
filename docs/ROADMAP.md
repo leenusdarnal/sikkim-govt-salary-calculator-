@@ -10,6 +10,8 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 - [x] Locate Gazette Schedule Part A and Part B; identify the full Government matrix and the specified-post upgrade schedule.
 - [x] Locate the State Bank of Sikkim Pay Matrix Annexure-I and record its selected Level/Grade Pay/entry-pay headings.
 - [x] Transcribe all 24 specified-post entries from Gazette Schedule Part B into a separate, reference-only lookup; retain the independent second-check and later-order review as open work.
+- [x] Review DOP OM No. 2026/GEN/DOP (20/03/2026), Notification No. 109/GEN/DOP with OM No. 6412/GEN/DOP (25/09/2025), and clarification No. 6780/GEN/DOP (27/10/2025) as separate applicability references.
+- [ ] Obtain and review Notification No. 99/GEN/DOP dated 06/02/2020 and the underlying regularisation/scheme notifications referenced by the 2026 OM before implementing the regularised-employee progression.
 - [ ] Independently transcribe and check every cell in Gazette Part A and compare every corresponding cell in the State Bank PDF.
 - [ ] Collect later orders affecting post-specific Level assignments and identify the MVP employee categories.
 - [ ] Locate and verify allowance orders, eligibility conditions and effective dates.
