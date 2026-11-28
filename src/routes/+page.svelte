@@ -178,7 +178,7 @@
           {/if}
           <button type="button" class="matrix-use" disabled={selectedPay === undefined} onclick={applySelectedPay}>Use selected basic pay</button>
         </div>
-        <p class="matrix-source">Cells are generated from Gazette entry pay using 3% increments rounded to the nearest ₹100. All 549 cells published for the 16 Levels shared with the <a href="https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf" target="_blank" rel="noreferrer">State Bank Annexure-I</a> match the corresponding lookup values; seven Gazette-only Levels still need independent checking. This lookup does not determine which Level applies to a post. <a href="https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf" target="_blank" rel="noreferrer">Official Gazette PDF</a>.</p>
+        <p class="matrix-source">Cells are generated from Gazette entry pay using 3% increments rounded to the nearest ₹100. All 549 cells published for the 16 Levels shared with the <a href="https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf" target="_blank" rel="noreferrer">State Bank Annexure-I</a> match the lookup. The other 245 cells in Levels 1, 2, 3, 8, 13, 18 and 23 have been transcribed from Gazette pages 12–14 and also match; a second independent review remains pending. This lookup does not determine which Level applies to a post. <a href="https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf" target="_blank" rel="noreferrer">Official Gazette PDF</a>.</p>
       </section>
 
       <section class="post-reference" aria-labelledby="post-reference-title">
