@@ -134,6 +134,10 @@ The table is transcribed from the Gazette page image. A second independent trans
 
 ## 4. Related Department of Personnel material found
 
+**Office Memorandum No. 2026/GEN/DOP dated 20 March 2026** addresses pay progression after regularisation for the four-year Group C/D regularisation category, eligible land-donor appointees and eligible temporary employees with benchmark disabilities. It prescribes temporary-capacity pay during the first year after regularisation, placement in the applicable Level 1/2/3 for the next four years after successful completion of one year of regular service, and regulation under Notification No. 99/GEN/DOP dated 06/02/2020 after five years of regular service. The original Notification No. 99/GEN/DOP and the referenced scheme/regularisation notifications still need to be obtained and reviewed; this pathway is not enabled in the calculator.
+
+
+
 **Notification No. 109/GEN/DOP dated 25 September 2025** is published at https://dop.sikkim.gov.in/notificationdoc/109.pdf. It records a one-time decision concerning employees whose services had been brought into the regular establishment in Pay Levels 1, 2 or 3 and who completed six years of regular service as on 31 December 2025, for induction into their respective cadres/services. The accompanying Office Memorandum No. 6412/GEN/DOP dated 25 September 2025 gives process instructions. This is an employee-induction measure; it does not amend the Part A cell values.
 
 A Department of Personnel clarification titled **Effect of EOL on the date of annual increment under the Sikkim Government Service Revised Pay Rules, 2018**, reference No. 6780/GEN/DOP, was also located at https://dop.sikkim.gov.in/circular/6780.pdf. It addresses qualifying service and postponement of an increment where Extra Ordinary Leave is taken. The issue date and complete applicability details must be captured from the original signed circular before this is added to executable increment logic.
