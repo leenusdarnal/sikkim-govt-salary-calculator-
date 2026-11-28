@@ -57,7 +57,7 @@ const SOURCE_MAPPINGS = [
   },
   {
     id: 'multi-dept-laboratory-attendant',
-    department: 'HRDD, Food Security & Agriculture Development, Horticulture & Cash Crops Development, and Animal Husbandry, Livestock, Fisheries & Veterinary Services Departments',
+    department: 'HRDD, Food Security & Agriculture Development Department, Horticulture & Cash Crops Development Department and Animal Husbandry, Livestock, Fisheries & Veterinary Services Department',
     post: 'Laboratory Attendant',
     existingGradePay: 2200,
     upgradedGradePay: 2400,
