@@ -35,7 +35,7 @@ The notes to Rule 2 separately address work-charged establishment drawing pay in
 
 ## 2. Gazette Part A: complete Level / Grade Pay / entry-pay headings
 
-The Schedule, Part A in the Gazette displays all 23 Government Pay Levels. The following table transcribes the column headings and first cell (entry pay) visible on printed pages 12–14. The lookup generates the remaining cell values from the published entry pay using a 3% increment rounded to the nearest ₹100, then added to the current cell. This progression matches the tabulated schedule at tested points; a full independent cell-by-cell transcription and second review remain pending.
+The Schedule, Part A in the Gazette displays all 23 Government Pay Levels. The following table transcribes the column headings and first cell (entry pay) visible on printed pages 12–14. The lookup generates the remaining cell values from the published entry pay using a 3% increment rounded to the nearest ₹100, then added to the current cell. Every one of the 549 cells in the 16 Levels shared with State Bank Annexure-I matches the corresponding value in that official cross-reference. The seven Gazette-only Levels (1, 2, 3, 8, 13, 18 and 23) still require an independent second transcription check against the Gazette page images.
 
 | Pay Level | Grade Pay (₹) | Cell 1 / entry pay (₹) |
 |---:|---:|---:|
@@ -146,7 +146,7 @@ A Department of Personnel clarification titled **Effect of EOL on the date of an
 
 ## 5. Implementation controls
 
-1. Store the Gazette Part A matrix and the State Bank Annexure-I cross-reference as separately sourced datasets until the full cell-by-cell comparison is signed off.
+1. Keep the Gazette Part A matrix and State Bank Annexure-I cross-reference as separately sourced datasets. The 549 cells published in the Bank's 16 selected Levels have passed the cross-check; do not treat the Bank schedule as a replacement for the seven Gazette-only Levels or as an employee-applicability decision.
 2. Preserve each Level's own available cell count. Do not pad a shorter column with inferred values or assume every Level has the same number of cells.
 3. Keep Part B post-specific upgraded Levels separate from the Part A baseline Level/Grade Pay mapping.
 4. Do not infer a post's Level from job title alone. Require a verified cadre/post mapping or accept a user-entered basic pay with an explicit manual-entry label.
