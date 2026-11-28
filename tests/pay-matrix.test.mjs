@@ -5,6 +5,14 @@ import { getPayCell, getPayLevel, PAY_LEVELS } from '../src/lib/pay-matrix.js';
 test('includes all 23 Gazette Part A levels with their source metadata and actual cell counts', () => {
   assert.equal(PAY_LEVELS.length, 23);
   assert.deepEqual(PAY_LEVELS.map(({ level }) => level), Array.from({ length: 23 }, (_, i) => i + 1));
+  assert.deepEqual(PAY_LEVELS.map(({ level, gradePay, entryPay }) => [level, gradePay, entryPay]), [
+    [1, 1400, 15200], [2, 1800, 16200], [3, 2300, 19300], [4, 2200, 18000],
+    [5, 2300, 19400], [6, 2400, 20300], [7, 2600, 21700], [8, 2700, 22800],
+    [9, 3000, 25400], [10, 3400, 30200], [11, 3800, 33700], [12, 4200, 37100],
+    [13, 4400, 37600], [14, 4600, 39100], [15, 5000, 46300], [16, 5400, 49700],
+    [17, 6200, 56000], [18, 6700, 65000], [19, 7200, 71100], [20, 8700, 83700],
+    [21, 9000, 105400], [22, 9500, 120500], [23, 10000, 124700]
+  ]);
   assert.equal(getPayLevel(1).gradePay, 1400);
   assert.equal(getPayLevel(4).gradePay, 2200);
   assert.equal(getPayLevel(17).entryPay, 56000);
@@ -42,4 +50,16 @@ test('does not return a value for invalid levels or blank cells', () => {
 test('rounds the three-percent increment to the nearest hundred before adding it', () => {
   assert.equal(getPayCell(1, 8), 18700);
   assert.equal(getPayCell(17, 6), 64900);
+});
+
+test('every generated cell is a whole-rupee amount and follows the documented progression', () => {
+  for (const level of PAY_LEVELS) {
+    assert.equal(level.cells[0], level.entryPay);
+    for (let index = 1; index < level.cells.length; index += 1) {
+      const current = level.cells[index - 1];
+      const increment = Math.floor((current * 0.03) / 100 + 0.5) * 100;
+      assert.equal(level.cells[index], current + increment, `Level ${level.level}, cell ${index + 1}`);
+      assert.equal(Number.isInteger(level.cells[index]), true);
+    }
+  }
 });
