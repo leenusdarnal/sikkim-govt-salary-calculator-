@@ -2,7 +2,7 @@
 
 A transparent, source-backed salary calculator designed for employees of the Government of Sikkim.
 
-The application includes an early manual-arithmetic estimate and a source-linked lookup for the 23 Levels in Gazette Schedule Part A. The matrix lookup can populate basic pay from a selected Level and cell, but it does not determine which Level applies to an employee or calculate an official salary. Independent full cell-by-cell verification and employee-applicability review remain in progress.
+The application includes an early manual-arithmetic estimate and a source-linked lookup for the 23 Levels in Gazette Schedule Part A. A regression test now cross-checks all 549 cells published across the 16 Levels shared with the State Bank of Sikkim Annexure-I; no mismatches were found. Seven Gazette-only Levels and employee applicability still require independent review. The lookup does not determine which Level applies to an employee or calculate an official salary.
 
 > **Project status:** early implementation. The current preview is not an official salary calculation. No allowance or deduction rate should be treated as confirmed until supported by the applicable order. The interim print view is limited to amounts entered by the user and is not an official salary statement.
 
@@ -17,7 +17,7 @@ The application includes an early manual-arithmetic estimate and a source-linked
 
 ## Planned modules
 
-1. **Pay matrix lookup (preview implemented)** — select a Gazette Part A Level and cell to copy its basic pay into the manual calculator; independent full cell-by-cell verification remains pending.
+1. **Pay matrix lookup (preview implemented)** — select a Gazette Part A Level and cell to copy its basic pay into the manual calculator; 549 shared cells have passed the State Bank cross-check, while seven Gazette-only Levels still need independent checking.
 2. **Salary calculator** — basic pay, applicable allowances, gross pay, deductions and estimated net salary.
 3. **Employee scenario** — only the minimum inputs needed for a calculation; no employee ID or bank details.
 4. **Increment and promotion** — estimate pay movement under verified rules.
@@ -50,7 +50,7 @@ A separate reference lookup also lists all 24 specified-post entries from Gazett
 
 The current lookup's Level metadata and entry-pay values are transcribed from Gazette Schedule Part A. Subsequent cells are generated from the published entry values using the 3% increment progression rounded to the nearest ₹100, then added to the current cell; representative values and terminal cells are tested against the Gazette pages. A complete independent cell-by-cell comparison is still pending.
 
-The [State Bank of Sikkim Pay Matrix, Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) is an officially published State Bank pay-matrix document. It displays 16 Levels, while Gazette Schedule Part A displays the wider Government matrix with 23 Levels. The overlapping Level, Grade Pay and entry-pay headings are recorded separately in the source audit; a full cell-by-cell comparison and employee-category applicability check are still pending.
+The [State Bank of Sikkim Pay Matrix, Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) is an officially published State Bank pay-matrix document. It displays 16 Levels, while Gazette Schedule Part A displays the wider Government matrix with 23 Levels. The overlapping 16 Levels have been cross-checked at all 549 published cells with no discrepancy; the seven Gazette-only Levels and employee-category applicability check remain pending.
 
 The application also lists selected later DOP applicability references: the 2026 regularisation pay-progression OM, the 2025 one-time cadre-induction notification/OM, and the 2025 EOL/increment clarification. These are reference notes only; no employee eligibility, regularisation progression or increment date is calculated automatically. The official DOP archive listing for Notification No. 99/GEN/DOP has been located, along with a readable non-government copy. The original signed PDF and referenced OM No. 5339/GEN/DOP remain unverified, so this material remains reference-only.
 
