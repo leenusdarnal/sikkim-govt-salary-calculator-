@@ -26,13 +26,11 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 - [x] Scaffold SvelteKit with TypeScript and Tailwind CSS.
 - [x] Add a basic type-checking and unit-test setup.
 - [x] Add GitHub Actions checks for pull requests and a GitHub Pages deployment workflow.
-- [ ] Add dependency lockfile and switch CI/deployment installation to npm ci.
+- [x] Add dependency lockfile and switch CI/deployment installation to npm ci.
 - [ ] Add linting and formatting.
 - [ ] Establish the complete folder structure for routes, components, domain logic and rules data.
 - [ ] Add responsive layout, typography, accessible form controls and number formatting.
 - [ ] Confirm Cloudflare deployment strategy and static/server requirements.
-
-**Dependency note:** the one-time lockfile generator is being added in a separate bootstrap PR. GitHub only exposes manual workflow dispatch after that workflow exists on the default branch. The npm ci switch will follow once the generated lockfile is committed.
 
 ## Phase 2 — Pay matrix
 
@@ -60,8 +58,9 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 
 **Outcome:** users can retain a clear record of a calculation without creating an account.
 
-- [ ] Add printable salary statement.
-- [ ] Add print stylesheet and PDF-friendly layout.
+- [x] Add an interim print-only view for manual arithmetic estimates; it is not a source-backed salary statement.
+- [ ] Add the complete printable salary statement with calculation notes, rule references and effective period.
+- [ ] Add print stylesheet and PDF-friendly layout for the complete statement.
 - [ ] Improve mobile form flow and accessibility.
 - [ ] Add offline support after the core app is stable.
 - [ ] Conduct a usability review with representative users.

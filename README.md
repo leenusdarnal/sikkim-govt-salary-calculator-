@@ -4,7 +4,7 @@ A transparent, source-backed salary calculator designed for employees of the Gov
 
 The application currently provides an early manual-arithmetic preview. The project is adding the applicable pay matrix and salary rules only after they have been traced to official documents, checked for employee applicability and independently tested.
 
-> **Project status:** early implementation. The current preview is not an official salary calculation. No allowance or deduction rate should be treated as confirmed until supported by the applicable order.
+> **Project status:** early implementation. The current preview is not an official salary calculation. No allowance or deduction rate should be treated as confirmed until supported by the applicable order. The interim print view is limited to amounts entered by the user and is not an official salary statement.
 
 ## Project goals
 
@@ -51,11 +51,20 @@ See [the pay matrix source audit](docs/PAY_MATRIX_SOURCE_AUDIT.md) and [the pay 
 
 ## Development
 
-Install dependencies and run the local preview with npm install and npm run dev.
+Install dependencies from the committed lockfile and start the local preview:
 
-Run project checks with npm run check, npm test and npm run build.
+```sh
+npm ci
+npm run dev
+```
 
-A one-time GitHub Actions workflow is being added to generate a package-lock file from the declared package manifest, verify an npm ci install, and publish the lockfile on a separate branch. After the generated file is committed, the CI and Pages workflows will switch from npm install to npm ci.
+Run project checks with:
+
+```sh
+npm run check
+npm test
+npm run build
+```
 
 ## Project documents
 

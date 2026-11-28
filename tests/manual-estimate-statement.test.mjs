@@ -1,0 +1,73 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createManualEstimateStatement, hasValidManualEstimateInputs } from '../src/lib/estimate-statement.js';
+
+test('creates labelled statement lines from normalized calculation amounts', () => {
+  const statement = createManualEstimateStatement({
+    basicPay: 56000,
+    allowances: 12000,
+    gross: 68000,
+    deductions: 8500,
+    net: 59500
+  });
+
+  assert.equal(statement.title, 'Monthly salary estimate');
+  assert.deepEqual(statement.lines, [
+    { id: 'basic-pay', label: 'Basic pay (user-entered)', amount: 56000 },
+    { id: 'allowances', label: 'Allowances (user-entered)', amount: 12000 },
+    { id: 'gross', label: 'Gross amount', amount: 68000, emphasis: true },
+    { id: 'deductions', label: 'Deductions (input, capped at gross pay)', amount: 8500, deduction: true },
+    { id: 'net', label: 'Estimated net salary', amount: 59500, emphasis: true }
+  ]);
+});
+
+test('explicitly identifies the document as a manual estimate, not an official salary statement', () => {
+  const statement = createManualEstimateStatement({
+    basicPay: 0,
+    allowances: 0,
+    gross: 0,
+    deductions: 0,
+    net: 0
+  });
+
+  assert.match(statement.disclaimer, /manual arithmetic estimate/i);
+  assert.match(statement.disclaimer, /no verified.*allowance.*deduction/i);
+  assert.match(statement.disclaimer, /not an official salary statement/i);
+});
+
+test('labels the deduction amount as capped at gross pay', () => {
+  const statement = createManualEstimateStatement({
+    basicPay: 1000,
+    allowances: 500,
+    gross: 1500,
+    deductions: 1500,
+    net: 0
+  });
+
+  const deductionsLine = statement.lines.find((line) => line.id === 'deductions');
+  assert.ok(deductionsLine, 'deductions line should exist');
+  assert.equal(deductionsLine.label, 'Deductions (input, capped at gross pay)');
+  assert.equal(deductionsLine.amount, 1500);
+});
+
+test('allows printing when all entered amounts are finite and non-negative', () => {
+  assert.equal(
+    hasValidManualEstimateInputs({ basicPay: 56000, allowances: 12000, deductions: 8500 }),
+    true
+  );
+});
+
+test('blocks printing when any amount is negative or non-finite', () => {
+  assert.equal(
+    hasValidManualEstimateInputs({ basicPay: -1, allowances: 12000, deductions: 8500 }),
+    false
+  );
+  assert.equal(
+    hasValidManualEstimateInputs({ basicPay: 56000, allowances: Number.NaN, deductions: 8500 }),
+    false
+  );
+  assert.equal(
+    hasValidManualEstimateInputs({ basicPay: 56000, allowances: 12000, deductions: Number.POSITIVE_INFINITY }),
+    false
+  );
+});
