@@ -13,7 +13,8 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 - [x] Review DOP OM No. 2026/GEN/DOP (20/03/2026), Notification No. 109/GEN/DOP with OM No. 6412/GEN/DOP (25/09/2025), and clarification No. 6780/GEN/DOP (27/10/2025) as separate applicability references.
 - [x] Locate the official DOP archive listing for Notification No. 99/GEN/DOP dated 06/02/2020 and a readable copy; record its provisional effect on original designation/original Pay Level after five years following regularisation. The original signed PDF and referenced OM No. 5339/GEN/DOP dated 11/02/2019 remain unverified.
 - [ ] Obtain and review the original Notification No. 99/GEN/DOP and OM No. 5339/GEN/DOP, plus the underlying regularisation/scheme notifications referenced by the 2026 OM, before implementing any regularised-employee progression.
-- [ ] Independently transcribe and check every cell in Gazette Part A and compare every corresponding cell in the State Bank PDF.
+- [x] Transcribe the State Bank Annexure-I values into a test-only fixture and compare all 549 cells across the 16 shared Levels with the Gazette-based lookup; no mismatches found.
+- [ ] Independently transcribe and second-check the seven Gazette-only Levels (1, 2, 3, 8, 13, 18 and 23) against Gazette page images.
 - [ ] Collect later orders affecting post-specific Level assignments and identify the MVP employee categories.
 - [ ] Locate and verify allowance orders, eligibility conditions and effective dates.
 - [ ] Identify deduction rules and which employee categories they apply to.
@@ -41,14 +42,14 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 
 **Outcome:** users can look up and select basic pay from the source-linked matrix preview; full independent verification and employee applicability remain open.
 
-- [x] Add all 23 Gazette Part A Levels, Grade Pay, entry pay, and source-specific cell counts; generate cells with the documented progression and retain exact column lengths. Independent full cell-by-cell verification remains open in Phase 0.
+- [x] Add all 23 Gazette Part A Levels, Grade Pay, entry pay, and source-specific cell counts; generate cells with the documented progression and retain exact column lengths. The 549-cell cross-check for 16 shared Levels is complete; seven Gazette-only Levels remain open in Phase 0.
 - [x] Add pay-level/cell selector and an explicit action to apply selected basic pay.
 - [x] Preserve manual basic-pay entry and validation.
 - [x] Display matrix version and official source.
 - [x] Add tests for all Level metadata, cell counts, invalid lookups, and every generated cell's progression, plus representative Gazette values.
 - [x] Keep Part B post-specific upgrades separate from the Part A base matrix.
 
-**Phase 2 limitation:** this is a source-linked lookup preview only. The full independent cell-by-cell audit and employee/post applicability review remain open; no allowance or deduction logic is implied.
+**Phase 2 limitation:** this is a source-linked lookup preview only. All 549 cells in the 16 Levels shared with State Bank Annexure-I match the corresponding lookup values; the seven Gazette-only Levels and employee/post applicability review remain open. No allowance or deduction logic is implied.
 
 ## Phase 3 — Monthly salary calculation
 
