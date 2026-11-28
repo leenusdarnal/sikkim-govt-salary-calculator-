@@ -58,3 +58,15 @@ export function createManualEstimateStatement(calculation) {
     ]
   };
 }
+
+/**
+ * Check whether the entered amounts are safe to include in a printable estimate.
+ *
+ * @param {{ basicPay?: unknown, allowances?: unknown, deductions?: unknown }} [values]
+ * @returns {boolean}
+ */
+export function hasValidManualEstimateInputs({ basicPay, allowances, deductions } = {}) {
+  return [basicPay, allowances, deductions].every(
+    (value) => typeof value === 'number' && Number.isFinite(value) && value >= 0
+  );
+}
