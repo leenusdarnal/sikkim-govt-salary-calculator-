@@ -11,8 +11,8 @@ test('includes all 23 Gazette Part A levels with their source metadata and actua
   assert.equal(getPayLevel(23).entryPay, 124700);
   assert.deepEqual(PAY_LEVELS.map(({ cells }) => cells.length), [
     40, 40, 40, 40, 40, 40, 40, 40,
-    40, 40, 40, 40, 40, 40, 37, 36,
-    32, 29, 27, 24, 19, 18, 17
+    40, 40, 40, 40, 40, 40, 36, 35,
+    32, 28, 26, 23, 19, 18, 17
   ]);
 });
 
@@ -20,8 +20,15 @@ test('matches representative Gazette cells at lower, middle and upper levels', (
   assert.equal(getPayCell(1, 1), 15200);
   assert.equal(getPayCell(1, 2), 15700);
   assert.equal(getPayCell(1, 40), 48500);
-  assert.equal(getPayCell(9, 40), 81000);\n  assert.equal(getPayCell(15, 36), 130500);\n  assert.equal(getPayCell(16, 35), 135500);\n  assert.equal(getPayCell(18, 28), 144300);\n  assert.equal(getPayCell(19, 26), 148600);\n  assert.equal(getPayCell(20, 23), 160500);
+  assert.equal(getPayCell(9, 40), 81000);
+  assert.equal(getPayCell(15, 36), 130500);
+  assert.equal(getPayCell(16, 35), 135500);
   assert.equal(getPayCell(17, 32), 139800);
+  assert.equal(getPayCell(18, 28), 144300);
+  assert.equal(getPayCell(19, 26), 148600);
+  assert.equal(getPayCell(20, 23), 160500);
+  assert.equal(getPayCell(21, 19), 179800);
+  assert.equal(getPayCell(22, 18), 199100);
   assert.equal(getPayCell(23, 17), 200100);
 });
 
