@@ -1,6 +1,6 @@
 <script lang="ts">
   import { calculateSalary } from '../lib/salary-calculation.js';
-  import { createManualEstimateStatement } from '../lib/estimate-statement.js';
+  import { createManualEstimateStatement, hasValidManualEstimateInputs } from '../lib/estimate-statement.js';
 
   let basicPay = 0;
   let allowances = 0;
@@ -8,6 +8,7 @@
 
   $: calculation = calculateSalary({ basicPay, allowances, deductions });
   $: statement = createManualEstimateStatement(calculation);
+  $: canPrint = hasValidManualEstimateInputs({ basicPay, allowances, deductions });
 
   const money = (value: number) =>
     new Intl.NumberFormat('en-IN', {
@@ -53,16 +54,16 @@
       </div>
 
       <label for="basic-pay">Basic pay <span>₹</span></label>
-      <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" aria-invalid={basicPay < 0} aria-describedby={basicPay < 0 ? "basic-pay-error" : undefined} placeholder="e.g. 56000" />
-      {#if basicPay < 0}<p class="field-error" id="basic-pay-error">Enter zero or a positive amount.</p>{/if}
+      <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" aria-invalid={!Number.isFinite(basicPay) || basicPay < 0} aria-describedby={basicPay < 0 ? "basic-pay-error" : undefined} placeholder="e.g. 56000" />
+      {#if !Number.isFinite(basicPay) || basicPay < 0}<p class="field-error" id="basic-pay-error">Enter a valid, non-negative amount.</p>{/if}
 
       <label for="allowances">Total allowances <span>₹</span></label>
-      <input id="allowances" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={allowances} inputmode="decimal" aria-invalid={allowances < 0} aria-describedby={allowances < 0 ? "allowances-error" : undefined} placeholder="Enter your allowance total" />
-      {#if allowances < 0}<p class="field-error" id="allowances-error">Enter zero or a positive amount.</p>{/if}
+      <input id="allowances" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={allowances} inputmode="decimal" aria-invalid={!Number.isFinite(allowances) || allowances < 0} aria-describedby={allowances < 0 ? "allowances-error" : undefined} placeholder="Enter your allowance total" />
+      {#if !Number.isFinite(allowances) || allowances < 0}<p class="field-error" id="allowances-error">Enter a valid, non-negative amount.</p>{/if}
 
       <label for="deductions">Total deductions <span>₹</span></label>
-      <input id="deductions" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={deductions} inputmode="decimal" aria-invalid={deductions < 0} aria-describedby={deductions < 0 ? "deductions-error" : undefined} placeholder="Enter your deduction total" />
-      {#if deductions < 0}<p class="field-error" id="deductions-error">Enter zero or a positive amount.</p>{/if}
+      <input id="deductions" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={deductions} inputmode="decimal" aria-invalid={!Number.isFinite(deductions) || deductions < 0} aria-describedby={deductions < 0 ? "deductions-error" : undefined} placeholder="Enter your deduction total" />
+      {#if !Number.isFinite(deductions) || deductions < 0}<p class="field-error" id="deductions-error">Enter a valid, non-negative amount.</p>{/if}
 
       <p class="helper">Use amounts from your own pay details. Leave a field at zero if it does not apply.</p>
     </div>
@@ -78,7 +79,8 @@
         <div><span>Deductions</span><strong>− {money(calculation.deductions)}</strong></div>
       </div>
       <div class="net-row"><span>Estimated net</span><strong>{money(calculation.net)}</strong></div>
-      <button type="button" class="print-action focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onclick={() => window.print()}>Print / Save PDF</button>
+      <button type="button" class="print-action focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" disabled={!canPrint} aria-describedby={!canPrint ? 'print-help' : undefined} onclick={() => window.print()}>Print / Save PDF</button>
+      {#if !canPrint}<p class="print-help" id="print-help" role="status">Correct invalid or negative amounts to enable printing.</p>{/if}
       <button type="button" class="reset focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onclick={() => { basicPay = 0; allowances = 0; deductions = 0; }}>Clear amounts</button>
     </aside>
   </section>
@@ -156,7 +158,9 @@
   .net-row { align-items: center; margin-top: 18px; font-weight: 700; }
   .net-row strong { font-size: 18px; }
   .print-action { align-self: flex-start; margin-top: 22px; padding: 10px 13px; border: 1px solid #b8cec5; border-radius: 9px; color: #173b34; background: white; font-size: 12px; font-weight: 750; cursor: pointer; }
-  .print-action:hover { background: #edf4f0; }
+  .print-action:hover:not(:disabled) { background: #edf4f0; }
+  .print-action:disabled { opacity: .55; cursor: not-allowed; }
+  .print-help { margin: 7px 0 0; color: #d3e1da; font-size: 11px; }
   .reset { align-self: flex-start; margin-top: 12px; padding: 10px 0 0; border: 0; background: none; color: #c5ddd3; font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
   .reset:hover { color: white; }
   .print-sheet { display: none; }
