@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { calculateSalary } from '../lib/salary-calculation.js';
   import { getPayCell, getPayLevel, PAY_LEVELS } from '../lib/pay-matrix.js';
+  import { POST_MAPPING_GROUPS, getPostMapping } from '../lib/post-level-mappings.js';
   import { nextTheme, resolveTheme } from '../lib/theme.js';
   import { createManualEstimateStatement, hasValidManualEstimateInputs } from '../lib/estimate-statement.js';
 
@@ -10,9 +11,11 @@
   let deductions = 0;
   let selectedLevel = 0;
   let selectedCell = 1;
+  let selectedPostMappingId = '';
   let isDark = false;
 
   $: selectedPayLevel = getPayLevel(selectedLevel);
+  $: selectedPostMapping = getPostMapping(selectedPostMappingId);
   $: selectedPay = getPayCell(selectedLevel, selectedCell);
   $: calculation = calculateSalary({ basicPay, allowances, deductions });
   $: statement = createManualEstimateStatement(calculation);
@@ -65,6 +68,12 @@
   function handleLevelChange(event: Event) {
     const value = (event.currentTarget as HTMLSelectElement).value;
     selectedLevel = value ? Number(value) : 0;
+    selectedCell = 1;
+  }
+
+  function applyPostMapping() {
+    if (!selectedPostMapping) return;
+    selectedLevel = selectedPostMapping.revisedLevel;
     selectedCell = 1;
   }
 
@@ -170,6 +179,57 @@
         </div>
         <p class="matrix-source">Cells are generated from Gazette entry pay using 3% increments rounded to the nearest ₹100; full cell-by-cell verification remains pending. This lookup does not determine which level applies to a post. <a href="https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf" target="_blank" rel="noreferrer">Official Gazette PDF</a>.</p>
       </section>
+
+      <section class="post-reference" aria-labelledby="post-reference-title">
+        <div class="matrix-heading">
+          <div>
+            <p class="eyebrow">Gazette No. 333 · Schedule Part B</p>
+            <h3 id="post-reference-title">Specified-post reference</h3>
+          </div>
+          <span class="matrix-badge">24 listed posts</span>
+        </div>
+        <p class="post-reference-intro">Part B lists revised Levels for specified posts. Choose the exact service and post to view its Gazette entry.</p>
+        <label for="post-reference-select">Department / service and post</label>
+        <select id="post-reference-select" bind:value={selectedPostMappingId}>
+          <option value="">Choose a specified post</option>
+          {#each POST_MAPPING_GROUPS as group (group.department)}
+            <optgroup label={group.department}>
+              {#each group.posts as mapping (mapping.id)}
+                <option value={mapping.id}>{mapping.post} · Level {mapping.revisedLevel}</option>
+              {/each}
+            </optgroup>
+          {/each}
+        </select>
+        {#if selectedPostMapping}
+          <div class="post-mapping-details" aria-live="polite">
+            <div><span>Existing Grade Pay</span><strong>₹{selectedPostMapping.existingGradePay.toLocaleString('en-IN')}</strong></div>
+            <div><span>Upgraded Grade Pay</span><strong>₹{selectedPostMapping.upgradedGradePay.toLocaleString('en-IN')}</strong></div>
+            <div><span>Revised Pay Level</span><strong>Level {selectedPostMapping.revisedLevel}</strong></div>
+            <div><span>Report paragraph</span><strong>{selectedPostMapping.reportParagraph}</strong></div>
+          </div>
+          <button type="button" class="post-reference-action" onclick={applyPostMapping}>Set Level {selectedPostMapping.revisedLevel} as the lookup starting point</button>
+        {/if}
+        <p class="matrix-source">This reference does not establish an individual employee's entitlement. Confirm the exact cadre, service, post and any later applicable order. Posts not listed here must not be mapped by inference. <a href="https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf" target="_blank" rel="noreferrer">Official Gazette PDF</a>.</p>
+      </section>
+
+      <details class="rules-coverage">
+        <summary>Who may be covered by the 2018 Rules? <span>Rule 2</span></summary>
+        <div class="rules-coverage-content">
+          <p><strong>General scope:</strong> Rule 2(1) covers persons other than members of the All India Services appointed to State services and posts in connection with the affairs of the State of Sikkim, subject to the Rules and applicable orders.</p>
+          <p><strong>Rule 2(2) exclusions include:</strong></p>
+          <ul>
+            <li>Persons not in whole-time employment.</li>
+            <li>Persons paid out of contingencies.</li>
+            <li>Persons paid otherwise than on a monthly basis, including piece-rate basis.</li>
+            <li>Persons employed on contract, except where the contract provides otherwise.</li>
+            <li>Persons re-employed in Government service after retirement.</li>
+            <li>Teachers of State Government Colleges drawing UGC pay.</li>
+            <li>Any other class or category specifically excluded by order of the Governor.</li>
+          </ul>
+          <p><strong>Separate notes to Rule 2:</strong> the Rules also address persons on work-charged establishment drawing pay in the existing Pay Band and Grade Pay, and persons who ceased service due to death, retirement or otherwise on or after 1 January 2016.</p>
+          <p class="coverage-warning">This is a reading aid, not an eligibility decision. Check the original Rule 2 text and later orders for the employee's actual category.</p>
+        </div>
+      </details>
 
       <label for="basic-pay">Basic pay <span>₹</span></label>
       <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" aria-invalid={!Number.isFinite(basicPay) || basicPay < 0} aria-describedby={!Number.isFinite(basicPay) || basicPay < 0 ? "basic-pay-error" : undefined} placeholder="e.g. 56000" />
@@ -280,6 +340,27 @@
   .matrix-use:disabled { opacity: .45; cursor: not-allowed; }
   .matrix-source { margin: 12px 0 0; color: #7b8982; font-size: 10px; line-height: 1.5; }
   .matrix-source a { color: #1b6653; font-weight: 700; text-underline-offset: 2px; }
+  .post-reference { margin: 0 0 18px; padding: 16px; border: 1px solid #dce6e0; border-radius: 12px; background: #f8faf9; }
+  .post-reference-intro { margin: 10px 0 0; color: #64776e; font-size: 12px; }
+  .post-reference label { display: block; margin: 12px 0 7px; font-size: 11px; }
+  .post-reference select { width: 100%; min-width: 0; min-height: 43px; padding: 9px 10px; border: 1px solid #d4dfd8; border-radius: 8px; background: #fff; color: #172a26; font: inherit; font-size: 12px; }
+  .post-reference select:focus-visible { outline: 2px solid #377b68; outline-offset: 2px; }
+  .post-mapping-details { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #dce6e0; }
+  .post-mapping-details div { display: grid; gap: 3px; }
+  .post-mapping-details span { color: #75867d; font-size: 10px; }
+  .post-mapping-details strong { color: #173b34; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .post-reference-action { width: 100%; min-height: 40px; margin-top: 13px; padding: 9px 12px; border: 1px solid #b8cec5; border-radius: 8px; color: #174f42; background: #edf4f0; font-size: 12px; font-weight: 750; cursor: pointer; }
+  .post-reference-action:hover { background: #e0eee7; }
+  .rules-coverage { margin: 0 0 25px; padding: 13px 15px; border: 1px solid #dce6e0; border-radius: 10px; background: #fff; }
+  .rules-coverage summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #24483e; font-size: 12px; font-weight: 750; cursor: pointer; }
+  .rules-coverage summary span { color: #788a81; font-size: 10px; font-weight: 650; white-space: nowrap; }
+  .rules-coverage summary:focus-visible { outline: 2px solid #377b68; outline-offset: 3px; }
+  .rules-coverage-content { padding-top: 8px; color: #586d63; font-size: 11px; }
+  .rules-coverage-content p { margin: 9px 0; }
+  .rules-coverage-content ul { margin: 6px 0 10px; padding-left: 19px; }
+  .rules-coverage-content li { margin: 4px 0; }
+  .coverage-warning { padding-top: 9px; border-top: 1px solid #e0e8e3; font-weight: 650; }
+
   h2 { margin: 0; font-size: 23px; line-height: 1.2; letter-spacing: -.03em; }
   .step { color: #87968f; font-size: 11px; font-weight: 750; letter-spacing: .08em; white-space: nowrap; }
   label { display: flex; justify-content: space-between; margin: 18px 0 7px; color: #314b42; font-size: 13px; font-weight: 700; }
@@ -360,6 +441,21 @@
   :global(html[data-theme="dark"]) .matrix-use:hover:not(:disabled) { background: #338568; }
   :global(html[data-theme="dark"]) .matrix-source { color: #93a69b; }
   :global(html[data-theme="dark"]) .matrix-source a { color: #8ed8bc; }
+
+  :global(html[data-theme="dark"]) .post-reference { border-color: #2d4237; background: #101b16; }
+  :global(html[data-theme="dark"]) .post-reference-intro { color: #a2b6aa; }
+  :global(html[data-theme="dark"]) .post-reference select { border-color: #3a4d43; background: #0d1714; color: #edf4f0; }
+  :global(html[data-theme="dark"]) .post-reference select:focus-visible { outline-color: #8ed8bc; }
+  :global(html[data-theme="dark"]) .post-mapping-details { border-color: #2d4237; }
+  :global(html[data-theme="dark"]) .post-mapping-details span { color: #8fa198; }
+  :global(html[data-theme="dark"]) .post-mapping-details strong { color: #e4eee8; }
+  :global(html[data-theme="dark"]) .post-reference-action { border-color: #527568; color: #e1f0e8; background: #20392e; }
+  :global(html[data-theme="dark"]) .post-reference-action:hover { background: #2b493b; }
+  :global(html[data-theme="dark"]) .rules-coverage { border-color: #2d4237; background: #14221c; }
+  :global(html[data-theme="dark"]) .rules-coverage summary { color: #dce9e2; }
+  :global(html[data-theme="dark"]) .rules-coverage summary span { color: #8fa198; }
+  :global(html[data-theme="dark"]) .rules-coverage-content { color: #afc1b6; }
+  :global(html[data-theme="dark"]) .coverage-warning { border-color: #2d4237; }
 
   @media print {
     @page { margin: 18mm; }

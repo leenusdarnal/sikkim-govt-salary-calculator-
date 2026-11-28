@@ -9,6 +9,7 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 - [x] Locate the baseline Sikkim Government Services (Revised Pay) Rules, 2018 and review Rules 1–6.
 - [x] Locate Gazette Schedule Part A and Part B; identify the full Government matrix and the specified-post upgrade schedule.
 - [x] Locate the State Bank of Sikkim Pay Matrix Annexure-I and record its selected Level/Grade Pay/entry-pay headings.
+- [x] Transcribe all 24 specified-post entries from Gazette Schedule Part B into a separate, reference-only lookup; retain the independent second-check and later-order review as open work.
 - [ ] Independently transcribe and check every cell in Gazette Part A and compare every corresponding cell in the State Bank PDF.
 - [ ] Collect later orders affecting post-specific Level assignments and identify the MVP employee categories.
 - [ ] Locate and verify allowance orders, eligibility conditions and effective dates.
