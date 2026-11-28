@@ -131,8 +131,8 @@ A Department of Personnel clarification titled **Effect of EOL on the date of an
 
 | Dataset | Status | Next verification step |
 |---|---|---|
-| Gazette Part A level headings, Grade Pay mapping and Cell 1 | Initial transcription complete | Independent second check against the page images |
-| Gazette Part A cell values | Not yet fully transcribed | Transcribe all Levels 1–23 and verify each cell |
+| Gazette Part A level headings, Grade Pay mapping, Cell 1 and column lengths | Transcribed into lookup data | Independent second check against page images |
+| Gazette Part A subsequent cells | Generated using 3% progression rounded to nearest ₹100; representative values and terminal cells tested | Full independent cell-by-cell transcription and comparison |
 | State Bank Annexure-I headings and entry pay | Initial transcription complete | Independently compare every Level and every cell with the published PDF |
 | Gazette Part B specified-post upgrades | Initial Excise rows transcribed | Review all other departments and obtain later orders affecting individual posts |
 | Employee-category applicability | Base Rule 2 reviewed | Identify exceptions and any later orders for the MVP employee groups |
