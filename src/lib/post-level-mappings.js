@@ -9,6 +9,19 @@
  * outstanding. Confirm the exact service/cadre/post and applicable orders
  * before relying on any listed Level.
  */
+/**
+ * @typedef {{
+ *   id: string,
+ *   department: string,
+ *   post: string,
+ *   existingGradePay: number,
+ *   upgradedGradePay: number,
+ *   revisedLevel: number,
+ *   reportParagraph: string
+ * }} PostLevelMapping
+ */
+
+/** @type {PostLevelMapping[]} */
 const SOURCE_MAPPINGS = [
   {
     id: 'accounts-accountant',
@@ -241,10 +254,12 @@ export const POST_LEVEL_MAPPINGS = Object.freeze(
   SOURCE_MAPPINGS.map((mapping) => Object.freeze(mapping))
 );
 
+/** @type {{ department: string, posts: PostLevelMapping[] }[]} */
 const groups = [];
+/** @type {Map<string, number>} */
 const groupIndex = new Map();
 
-for (const mapping of POST_LEVEL_MAPPINGS) {
+for (const mapping of SOURCE_MAPPINGS) {
   let groupPosition = groupIndex.get(mapping.department);
   if (groupPosition === undefined) {
     groupPosition = groups.length;
@@ -263,7 +278,7 @@ export const POST_MAPPING_GROUPS = Object.freeze(
   )
 );
 
-/** @param {string} id */
+/** @param {string} id @returns {PostLevelMapping | undefined} */
 export function getPostMapping(id) {
   return POST_LEVEL_MAPPINGS.find((mapping) => mapping.id === id);
 }
