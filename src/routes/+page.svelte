@@ -20,18 +20,34 @@
 
   onMount(() => {
     isDark = document.documentElement.dataset.theme === 'dark';
+    const systemPreference = window.matchMedia('(prefers-color-scheme: dark)');
+    const followSystemTheme = (event: MediaQueryListEvent) => {
+      let savedTheme: string | null = null;
+      try {
+        savedTheme = localStorage.getItem('sikkim-salary-theme');
+      } catch {
+        // Follow the live system preference if storage is unavailable.
+      }
+      if (savedTheme !== 'light' && savedTheme !== 'dark') {
+        applyTheme(event.matches ? 'dark' : 'light');
+      }
+    };
+    systemPreference.addEventListener('change', followSystemTheme);
+    return () => systemPreference.removeEventListener('change', followSystemTheme);
   });
 
-  function toggleTheme() {
-    const theme = nextTheme(isDark ? 'dark' : 'light');
+  function applyTheme(theme: 'light' | 'dark') {
     isDark = theme === 'dark';
     document.documentElement.dataset.theme = theme;
-
     const scheme = document.querySelector('meta[name="color-scheme"]');
     scheme?.setAttribute('content', theme);
     const themeColor = document.querySelector('meta[name="theme-color"]');
     themeColor?.setAttribute('content', theme === 'dark' ? '#0d1714' : '#173b34');
+  }
 
+  function toggleTheme() {
+    const theme = nextTheme(isDark ? 'dark' : 'light');
+    applyTheme(theme);
     try {
       localStorage.setItem('sikkim-salary-theme', theme);
     } catch {
