@@ -20,7 +20,7 @@ test('matches representative Gazette cells at lower, middle and upper levels', (
   assert.equal(getPayCell(1, 1), 15200);
   assert.equal(getPayCell(1, 2), 15700);
   assert.equal(getPayCell(1, 40), 48500);
-  assert.equal(getPayCell(9, 40), 81000);
+  assert.equal(getPayCell(9, 40), 81000);\n  assert.equal(getPayCell(15, 36), 130500);\n  assert.equal(getPayCell(16, 35), 135500);\n  assert.equal(getPayCell(18, 28), 144300);\n  assert.equal(getPayCell(19, 26), 148600);\n  assert.equal(getPayCell(20, 23), 160500);
   assert.equal(getPayCell(17, 32), 139800);
   assert.equal(getPayCell(23, 17), 200100);
 });
