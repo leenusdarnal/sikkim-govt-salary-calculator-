@@ -99,18 +99,38 @@ The State Bank PDF is an official State Bank of Sikkim matrix publication, and i
 
 ## 3. Part B: specified upgraded posts
 
-The Gazette's Schedule, Part B is a distinct schedule and must not be mixed into the general Part A matrix as though it changed every post with the same old Grade Pay.
+The Gazette's Schedule, Part B (printed page 15) is a separate table of upgraded Levels for specified posts. It records the existing Grade Pay, the Grade Pay corresponding to the upgradation recommended in the report, and the revised Pay Matrix Level. The table below transcribes all 24 entries shown on that page, grouped by the service/department headings printed in the Gazette.
 
-The Excise (Abkari) Department entries visible in Part B include:
+| Service / department as grouped in Part B | Specified post | Existing Grade Pay (₹) | Upgraded Grade Pay shown (₹) | Revised Level | Report paragraph |
+|---|---|---:|---:|---:|---:|
+| Sub-ordinate Accounts Service | Accountant | 3,400 | 3,800 | 11 | 5.11 |
+| Sub-ordinate Accounts Service | Sr. Accountant | 4,200 | 4,600 | 14 | 5.11 |
+| Ministerial and Executive Service | Head Assistant | 3,400 | 3,800 | 11 | 5.11 |
+| Ministerial and Executive Service | Inspector | 3,800 | 4,200 | 12 | 5.11 |
+| Ministerial and Executive Service | Office Superintendent | 4,200 | 4,600 | 14 | 5.11 |
+| HRDD, Food Security & Agriculture Development, Horticulture & Cash Crops Development, and Animal Husbandry, Livestock, Fisheries & Veterinary Services Departments | Laboratory Attendant | 2,200 | 2,400 | 6 | 5.14 |
+| Food Security and Agriculture Development and Horticulture & Cash Crops Development Departments | Field Assistant | 2,300 | 2,400 | 6 | 5.15 |
+| Excise (Abkari) Department | Head Constable | 3,000 | 3,400 | 10 | 5.33 |
+| Excise (Abkari) Department | Assistant Sub-Inspector | 3,000 | 3,800 | 11 | 5.33 |
+| Excise (Abkari) Department | Sub-Inspector | 3,400 | 4,200 | 12 | 5.33 |
+| Excise (Abkari) Department | Inspector | 3,800 | 4,600 | 14 | 5.33 |
+| Forest, Environment and Wildlife Management Department | Head Forest Guard | 3,000 | 3,400 | 10 | 5.70 |
+| Forest, Environment and Wildlife Management Department | Block Officer | 3,400 | 3,800 | 11 | 5.70 |
+| Forest, Environment and Wildlife Management Department | Range Officer | 4,200 | 4,600 | 14 | 5.70 |
+| Sub-ordinate Engineering Service | Junior Engineer | 3,800 | 4,200 | 12 | 5.72 |
+| Sub-ordinate Police Service | Head Constable | 3,000 | 3,400 | 10 | 5.78 |
+| Sub-ordinate Police Service | Asstt. Sub-Inspector | 3,400 | 3,800 | 11 | 5.78 |
+| Sub-ordinate Police Service | Sub-Inspector | 3,800 | 4,200 | 12 | 5.79 |
+| Sub-ordinate Revenue Service, Commercial Tax Division, FRED | Assistant Sub Inspector | 2,700 | 3,000 | 9 | 5.85 |
+| Sub-ordinate Revenue Service, Commercial Tax Division, FRED | Sub Inspector | 3,000 | 3,400 | 10 | 5.85 |
+| Sub-ordinate Revenue Service, Commercial Tax Division, FRED | Inspector | 3,800 | 4,200 | 12 | 5.85 |
+| Transport Department (SNT) | Constable, Transport Department | 2,300 | 2,400 | 6 | 5.86 |
+| Transport Department (SNT) | Mechanics (Non ITI) | 2,200 | 2,300 | 5 | 5.16 |
+| Health Care, Human Services & Family Welfare Department | Counsellor/Pharmacist with degree | 3,800 | 4,200 | 12 | 5.43 |
 
-| Post | Existing Grade Pay | Upgraded Grade Pay shown | Revised Level shown |
-|---|---:|---:|---:|
-| Head Constable | 3,000 | 3,400 | 10 |
-| Assistant Sub-Inspector | 3,000 | 3,800 | 11 |
-| Sub-Inspector | 3,400 | 4,200 | 12 |
-| Inspector | 3,800 | 4,600 | 14 |
+The application exposes these rows as a reference-only lookup. It can set the Part A Level selector to the listed Level as a starting point, but it does not infer that a user's appointment, cadre, service history or current entitlement matches the row. Similar titles in different services (for example, Assistant Sub-Inspector) remain separate records. No general grade-pay-to-Level conversion is implied.
 
-These are source transcriptions from the Excise (Abkari) Department section of Part B. Before using a post mapping for an employee's current pay calculation, confirm that the employee's cadre, post, appointment/promotion history and any later applicable order match the entry.
+The table is transcribed from the Gazette page image. A second independent transcription check and review of subsequent orders affecting these posts remain outstanding. Users must confirm the exact post/service and current applicable orders before relying on an entry.
 
 ## 4. Related Department of Personnel material found
 
@@ -134,7 +154,7 @@ A Department of Personnel clarification titled **Effect of EOL on the date of an
 | Gazette Part A level headings, Grade Pay mapping, Cell 1 and column lengths | Transcribed into lookup data | Independent second check against page images |
 | Gazette Part A subsequent cells | Generated using 3% progression rounded to nearest ₹100; representative values and terminal cells tested | Full independent cell-by-cell transcription and comparison |
 | State Bank Annexure-I headings and entry pay | Initial transcription complete | Independently compare every Level and every cell with the published PDF |
-| Gazette Part B specified-post upgrades | Initial Excise rows transcribed | Review all other departments and obtain later orders affecting individual posts |
+| Gazette Part B specified-post upgrades | All 24 entries on printed page 15 transcribed into a separate reference | Independent second check and review later orders affecting individual posts |
 | Employee-category applicability | Base Rule 2 reviewed | Identify exceptions and any later orders for the MVP employee groups |
 | Annual increment / EOL treatment | Clarification located | Capture issue date, qualifying-service details and full scope from original circular |
 
