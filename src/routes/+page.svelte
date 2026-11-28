@@ -54,15 +54,15 @@
       </div>
 
       <label for="basic-pay">Basic pay <span>₹</span></label>
-      <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" aria-invalid={!Number.isFinite(basicPay) || basicPay < 0} aria-describedby={basicPay < 0 ? "basic-pay-error" : undefined} placeholder="e.g. 56000" />
+      <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" aria-invalid={!Number.isFinite(basicPay) || basicPay < 0} aria-describedby={!Number.isFinite(basicPay) || basicPay < 0 ? "basic-pay-error" : undefined} placeholder="e.g. 56000" />
       {#if !Number.isFinite(basicPay) || basicPay < 0}<p class="field-error" id="basic-pay-error">Enter a valid, non-negative amount.</p>{/if}
 
       <label for="allowances">Total allowances <span>₹</span></label>
-      <input id="allowances" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={allowances} inputmode="decimal" aria-invalid={!Number.isFinite(allowances) || allowances < 0} aria-describedby={allowances < 0 ? "allowances-error" : undefined} placeholder="Enter your allowance total" />
+      <input id="allowances" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={allowances} inputmode="decimal" aria-invalid={!Number.isFinite(allowances) || allowances < 0} aria-describedby={!Number.isFinite(allowances) || allowances < 0 ? "allowances-error" : undefined} placeholder="Enter your allowance total" />
       {#if !Number.isFinite(allowances) || allowances < 0}<p class="field-error" id="allowances-error">Enter a valid, non-negative amount.</p>{/if}
 
       <label for="deductions">Total deductions <span>₹</span></label>
-      <input id="deductions" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={deductions} inputmode="decimal" aria-invalid={!Number.isFinite(deductions) || deductions < 0} aria-describedby={deductions < 0 ? "deductions-error" : undefined} placeholder="Enter your deduction total" />
+      <input id="deductions" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={deductions} inputmode="decimal" aria-invalid={!Number.isFinite(deductions) || deductions < 0} aria-describedby={!Number.isFinite(deductions) || deductions < 0 ? "deductions-error" : undefined} placeholder="Enter your deduction total" />
       {#if !Number.isFinite(deductions) || deductions < 0}<p class="field-error" id="deductions-error">Enter a valid, non-negative amount.</p>{/if}
 
       <p class="helper">Use amounts from your own pay details. Leave a field at zero if it does not apply.</p>
@@ -94,7 +94,7 @@
     <p class="print-lead">Itemized monthly calculation using amounts manually entered by the user.</p>
     <dl class="print-breakdown">
       {#each statement.lines as line (line.id)}
-        <div class:print-total={line.emphasis} class:print-deduction={line.deduction}>
+        <div class:print-total={line.emphasis}>
           <dt>{line.label}</dt>
           <dd>{line.deduction ? '− ' : ''}{money(line.amount)}</dd>
         </div>
