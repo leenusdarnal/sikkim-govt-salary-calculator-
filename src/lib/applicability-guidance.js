@@ -3,8 +3,9 @@
  *
  * These are reference summaries only. They intentionally do not infer a user's
  * eligibility, change a selected Pay Level, or produce pay/increment amounts.
- * The referenced Notification No. 99/GEN/DOP (06/02/2020) is cited by the 2026
- * OM but has not yet been independently obtained and reviewed in this project.
+ * Notification No. 99/GEN/DOP is listed on the official DOP notification archive.
+ * A readable copy was located elsewhere, but the original official PDF and the
+ * referenced Office Memorandum No. 5339/GEN/DOP remain unverified.
  */
 
 /**
@@ -45,6 +46,24 @@ const SOURCE_GUIDANCE = [
     ],
     status: 'Reference only — not enabled for automatic calculation',
     caution: 'The OM does not identify a Level for a particular post by itself. The cited Notification No. 99/GEN/DOP and the underlying regularisation/scheme notifications must be obtained and reviewed before implementing this pathway. Confirm the employee’s regularisation order, category, post and service dates.'
+  },
+  {
+    id: 'regularisation-original-pay-level-2020',
+    title: 'Original Pay Level after five years of regularisation',
+    sourceLabel: 'Notification No. 99/GEN/DOP',
+    sourceDate: '6 February 2020',
+    sourceUrl: 'https://dop.sikkim.gov.in/visitor/notifications',
+    sourceKind: 'Notification listed in official DOP archive; readable copy not independently authenticated',
+    calculationEnabled: false,
+    applicability: [
+      'The located copy addresses employees regularised after completion of 15, 10 or 5 years of service, respectively.'
+    ],
+    stages: [
+      'The located copy says that prefixes such as “Junior” or “Assistant” and other attached nomenclature are to be omitted, restoring the original designation held while working in temporary capacity.',
+      'It says that after five years of service following regularisation, employees become eligible for the original Pay Level prescribed for the post, in accordance with Office Memorandum No. 5339/GEN/DOP dated 11 February 2019.'
+    ],
+    status: 'Official archive listing confirmed; document text and linked 2019 OM still require primary-source verification',
+    caution: 'The official DOP archive lists Notification No. 99/GEN/DOP dated 06/02/2020, but the original PDF was not retrieved in this review. The readable text was found in a non-government copy and must be checked against the signed notification. Office Memorandum No. 5339/GEN/DOP also remains unverified. This note does not determine a specific employee’s original post Level or calculate pay.'
   },
   {
     id: 'one-time-cadre-induction-2025',
