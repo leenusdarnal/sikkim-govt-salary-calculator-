@@ -123,13 +123,13 @@
         </div>
         <div class="matrix-fields">
           <label for="pay-level">Pay level</label>
+          <label for="pay-cell">Cell</label>
           <select id="pay-level" bind:value={selectedLevel} onchange={(event) => { selectedLevel = Number((event.currentTarget as HTMLSelectElement).value); selectedCell = 1; }}>
             <option value={0}>Choose a level</option>
             {#each PAY_LEVELS as level (level.level)}
               <option value={level.level}>Level {level.level}</option>
             {/each}
           </select>
-          <label for="pay-cell">Cell</label>
           <select id="pay-cell" bind:value={selectedCell} disabled={!selectedPayLevel}>
             {#each selectedPayLevel?.cells ?? [] as amount, index (index)}
               <option value={index + 1}>Cell {index + 1} · {money(amount)}</option>
@@ -145,7 +145,7 @@
           {/if}
           <button type="button" class="matrix-use" disabled={selectedPay === undefined} onclick={applySelectedPay}>Use selected basic pay</button>
         </div>
-        <p class="matrix-source">Cell progression follows 3% increments rounded to the nearest ₹100. This lookup does not determine which level applies to a post. <a href="https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf" target="_blank" rel="noreferrer">Official Gazette PDF</a>.</p>
+        <p class="matrix-source">Cells are generated from Gazette entry pay using 3% increments rounded to the nearest ₹100; full cell-by-cell verification remains pending. This lookup does not determine which level applies to a post. <a href="https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf" target="_blank" rel="noreferrer">Official Gazette PDF</a>.</p>
       </section>
 
       <label for="basic-pay">Basic pay <span>₹</span></label>
@@ -291,7 +291,7 @@
   .next a { color: #1b6653; font-size: 13px; font-weight: 750; text-underline-offset: 4px; }
   footer { display: flex; justify-content: space-between; gap: 12px; padding: 20px 0 28px; border-top: 1px solid #dfe7e2; color: #829087; font-size: 11px; }
   @media (max-width: 720px) { .intro { padding-top: 38px; } .calculator { grid-template-columns: 1fr; } .result-panel { min-height: 410px; } footer { flex-direction: column; } }
-  @media (max-width: 420px) { .topbar-actions { gap: 7px; } .theme-toggle { width: 36px; height: 36px; } .matrix-lookup { padding: 13px; } .matrix-fields { gap: 0 8px; } }
+  @media (max-width: 420px) { .topbar-actions { gap: 7px; } .theme-toggle { width: 36px; height: 36px; } .status { display: none; } .matrix-lookup { padding: 13px; } .matrix-fields { gap: 0 8px; } }
   @media (max-width: 420px) { .shell { width: calc(100% - 24px); } .brand { font-size: 13px; } .mark { width: 34px; height: 34px; } .status { font-size: 10px; } .desktop-break { display: none; } }
 
   :global(html[data-theme="dark"] body) { background: #0d1714; color: #e5eee9; }
