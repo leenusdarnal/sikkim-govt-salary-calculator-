@@ -18,7 +18,8 @@
  *   applicability: readonly string[],
  *   stages: readonly string[],
  *   status: string,
- *   caution: string
+ *   caution: string,
+ *   calculationEnabled: boolean
  * }} ApplicabilityGuidance
  */
 
@@ -31,6 +32,7 @@ const SOURCE_GUIDANCE = [
     sourceDate: '20 March 2026',
     sourceUrl: 'https://dop.sikkim.gov.in/notificationdoc/2026.pdf',
     sourceKind: 'Office Memorandum',
+    calculationEnabled: false,
     applicability: [
       'Group C and D temporary employees covered by the four-year continuous-service regularisation policy (Notification No. 100/GEN/DOP read with No. 24/GEN/DOP).',
       'Persons appointed in lieu of land donated to the Government, after the prescribed three years of continuous temporary service and subject to the scheme criteria (Notification No. 13/GEN/DOP).',
@@ -51,6 +53,7 @@ const SOURCE_GUIDANCE = [
     sourceDate: '25 September 2025',
     sourceUrl: 'https://dop.sikkim.gov.in/notificationdoc/109.pdf',
     sourceKind: 'Notification with accompanying Office Memorandum',
+    calculationEnabled: false,
     applicability: [
       'Employees whose services had been brought into the regular establishment in Pay Level 1, 2 or 3 and who completed six years of regular service as on 31 December 2025.'
     ],
@@ -69,6 +72,7 @@ const SOURCE_GUIDANCE = [
     sourceDate: '27 October 2025',
     sourceUrl: 'https://dop.sikkim.gov.in/circular/6780.pdf',
     sourceKind: 'Department of Personnel clarification',
+    calculationEnabled: false,
     applicability: [
       'Government servants drawing pay in the revised Pay Matrix where Extraordinary Leave (EOL) affects qualifying service for the annual increment.'
     ],
