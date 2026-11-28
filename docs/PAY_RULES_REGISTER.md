@@ -25,7 +25,7 @@ News reports, third-party calculators, social posts and informal messages may he
 | Notification No. 99/GEN/DOP dated 06/02/2020 (cited by the 2026 OM) | Cited as the authority for regulating pay after five years of regular service following the regularisation pathway | Original notification not yet obtained; not implementation-ready |
 | [DOP Office Memorandum No. 2026/GEN/DOP](https://dop.sikkim.gov.in/notificationdoc/2026.pdf) | Dated 20/03/2026; sets a distinct pay progression for the four-year Group C/D category, eligible land-donor appointees and eligible temporary employees with benchmark disabilities: first year at temporary-capacity pay, next four years in applicable Level 1/2/3, and after five years under Notification No. 99/GEN/DOP | Source reviewed; downstream Notification No. 99 and referenced regularisation/scheme notifications still require review; not implemented in calculator |
 | [DOP clarification No. 6780/GEN/DOP](https://dop.sikkim.gov.in/circular/6780.pdf) | Dated 27/10/2025; clarifies EOL and annual increment dates (1 January / 1 July) where qualifying-service conditions are met | Source reviewed; individual qualifying-service treatment and edge cases require review; increment logic not implemented |
-| [DOP clarification No. 6780/GEN/DOP](https://dop.sikkim.gov.in/circular/6780.pdf) | Clarification on effect of Extra Ordinary Leave on annual increment under the 2018 Revised Pay Rules | Located; date and complete applicability must be recorded before implementing increment logic |
+
 
 ### Important distinction between the two matrix PDFs
 
