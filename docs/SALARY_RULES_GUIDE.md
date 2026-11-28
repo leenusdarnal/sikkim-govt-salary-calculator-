@@ -2,7 +2,7 @@
 
 **Purpose:** This is the working guide for research and implementation of salary rules. It records what the current source review supports, what remains unverified, and the gates that must be met before figures are used by the calculator.
 
-**Current status:** Research baseline established; the full pay-matrix transcription, independent checking, employee-category mapping and salary-rule verification are not complete. This document is a guide, not an official pay determination.
+**Current status:** Research baseline established. All 549 cells published in the State Bank of Sikkim Annexure-I have been cross-checked against the corresponding 16 Gazette Levels with no mismatch. Seven Gazette-only Levels still need an independent second transcription check; employee-category mapping and salary-rule verification also remain incomplete. This document is a guide, not an official pay determination.
 
 ## 1. Source hierarchy and evidence standard
 
@@ -30,7 +30,7 @@ Rule 2 includes coverage conditions and exclusions. The reviewed text identifies
 
 ### Gazette Part A and State Bank Annexure-I
 
-The current audit contains an initial transcription of Level, Grade Pay and Cell 1/entry-pay headings. It is not a complete pay dataset. The Gazette has Levels 1–23; the State Bank PDF displays a selected subset of 16 Levels. Corresponding headings and entry-pay combinations were initially transcribed as matching, but the full cell-by-cell comparison and independent review remain pending.
+The Gazette has Levels 1–23; the State Bank PDF displays a selected subset of 16 Levels. A test-only fixture records every cell published in the Bank PDF. All 549 values (320 on page 1 and 229 on page 2) match the corresponding values in the Gazette-based lookup, with no discrepancy. The Bank cross-check does not cover Gazette-only Levels 1, 2, 3, 8, 13, 18 and 23; those seven columns still need an independent second transcription check against the Gazette page images. The source audit and test fixture record the comparison.
 
 Preserve each Level's actual cell count. Blank cells are not values, and a shorter column must not be padded with inferred amounts. Do not load any partial matrix into the calculation engine.
 
@@ -61,7 +61,7 @@ Manual basic-pay entry may be supported as a clearly labelled user-provided inpu
 
 ## 4. Required work, in dependency order
 
-1. **Complete and independently verify the matrix.** Transcribe every Gazette Part A cell for Levels 1–23 from the source pages; preserve column lengths; have a second check against page images. Compare every corresponding State Bank Annexure-I cell and record any differences.
+1. **Complete and independently verify the matrix.** The 549 cells shown in State Bank Annexure-I have been compared with the matching Gazette-based lookup values, with no mismatch. Independently transcribe and second-check every Gazette Part A cell for Levels 1, 2, 3, 8, 13, 18 and 23; preserve each column length and record the reviewer and source page.
 2. **Resolve scope and post mappings.** Define the MVP employee categories. Review Part B for all relevant departments and locate later orders affecting post-specific Level assignments. Record exceptions and required evidence.
 3. **Verify rule families separately.** Locate primary orders for allowances, deductions, increments and other planned features. Capture issue/effective dates, eligibility, formula/base, caps, exemptions, rounding and retrospective instructions.
 4. **Create checked scenarios.** Calculate representative and boundary cases independently, record the source-backed inputs and expected results, and have them reviewed.
@@ -81,9 +81,9 @@ Manual basic-pay entry may be supported as a clearly labelled user-provided inpu
 | Work item | Status | Next action |
 |---|---|---|
 | 2018 Rules, Rules 1–6 and schedule locations | Reviewed | Preserve as baseline; check later applicable orders |
-| Gazette Part A headings and entry pay | Initial transcription | Independent check against page images |
-| Gazette Part A full cell data | Pending | Transcribe and verify all Levels/cells |
-| State Bank Annexure-I | Initial headings/entry pay | Compare every cell with Gazette Part A |
+| Gazette Part A headings and entry pay | All 23 Levels transcribed | Independent second check against page images |
+| Gazette Part A full cell data | 549 shared cells cross-checked with no mismatch; seven Gazette-only Levels remain open | Independently transcribe and second-check Levels 1, 2, 3, 8, 13, 18 and 23 |
+| State Bank Annexure-I | All 549 published cells in 16 Levels recorded in a test fixture and matched against corresponding lookup values | Keep the automated comparison in CI; investigate any future mismatch |
 | Part B post mappings | 24 printed-page entries transcribed; second check pending | Independently verify each entry and review later orders |
 | Employee applicability | Rule 2, Part B and later regularisation/induction measures reviewed as references | Obtain Notification No. 99/GEN/DOP and underlying scheme/regularisation orders; map individual cadre/post evidence |
 | Allowances and deductions | Pending | Locate primary orders and capture applicability/effective dates |
