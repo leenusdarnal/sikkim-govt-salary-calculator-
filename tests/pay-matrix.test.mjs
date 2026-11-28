@@ -13,10 +13,10 @@ test('includes all 23 Gazette Part A levels with their source metadata and actua
     [17, 6200, 56000], [18, 6700, 65000], [19, 7200, 71100], [20, 8700, 83700],
     [21, 9000, 105400], [22, 9500, 120500], [23, 10000, 124700]
   ]);
-  assert.equal(getPayLevel(1).gradePay, 1400);
-  assert.equal(getPayLevel(4).gradePay, 2200);
-  assert.equal(getPayLevel(17).entryPay, 56000);
-  assert.equal(getPayLevel(23).entryPay, 124700);
+  assert.equal(getPayLevel(1)?.gradePay, 1400);
+  assert.equal(getPayLevel(4)?.gradePay, 2200);
+  assert.equal(getPayLevel(17)?.entryPay, 56000);
+  assert.equal(getPayLevel(23)?.entryPay, 124700);
   assert.deepEqual(PAY_LEVELS.map(({ cells }) => cells.length), [
     40, 40, 40, 40, 40, 40, 40, 40,
     40, 40, 40, 40, 40, 40, 36, 35,
