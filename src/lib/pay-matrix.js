@@ -35,6 +35,7 @@ const SOURCE_LEVELS = [
   [23, 10000, 124700, 17]
 ];
 
+/** @param {number} currentPay */
 function nextCell(currentPay) {
   const increment = Math.floor((currentPay * 0.03) / 100 + 0.5) * 100;
   return currentPay + increment;
@@ -56,12 +57,12 @@ export const PAY_LEVELS = Object.freeze(
   })
 );
 
-/** @param {number} level */
+/** @param {number} level @returns {{level:number, gradePay:number, entryPay:number, cells: readonly number[]} | undefined} */
 export function getPayLevel(level) {
   return PAY_LEVELS.find((item) => item.level === level);
 }
 
-/** @param {number} level @param {number} cell */
+/** @param {number} level @param {number} cell @returns {number | undefined} */
 export function getPayCell(level, cell) {
   const payLevel = getPayLevel(level);
   if (!payLevel || !Number.isInteger(cell) || cell < 1) return undefined;
