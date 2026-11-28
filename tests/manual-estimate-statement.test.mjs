@@ -45,6 +45,7 @@ test('labels the deduction amount as capped at gross pay', () => {
   });
 
   const deductionsLine = statement.lines.find((line) => line.id === 'deductions');
+  assert.ok(deductionsLine, 'deductions line should exist');
   assert.equal(deductionsLine.label, 'Deductions (input, capped at gross pay)');
   assert.equal(deductionsLine.amount, 1500);
 });
