@@ -1,6 +1,6 @@
 # Pay Matrix Source Audit
 
-**Status:** the application now exposes a 23-Level Part A lookup. Level, Grade Pay, entry pay and column lengths are transcribed; subsequent cells are generated using the 3% / nearest-₹100 progression visible in the schedule. Representative values and terminal cells are tested against Gazette pages 12–14. A complete independent cell-by-cell transcription and employee-applicability review remain pending. See [SALARY_RULES_GUIDE.md](SALARY_RULES_GUIDE.md) for implementation guardrails.
+**Status:** the application exposes a 23-Level Part A lookup. All 549 cells published for the 16 Levels shared with the State Bank of Sikkim Annexure-I have been cross-checked against the corresponding generated values, with no mismatches. Seven Gazette-only Levels (1, 2, 3, 8, 13, 18 and 23) still require an independent second transcription check. Employee-applicability review also remains pending. See [SALARY_RULES_GUIDE.md](SALARY_RULES_GUIDE.md) for implementation guardrails.
 
 ## 1. Governing Government of Sikkim rules
 
@@ -35,7 +35,7 @@ The notes to Rule 2 separately address work-charged establishment drawing pay in
 
 ## 2. Gazette Part A: complete Level / Grade Pay / entry-pay headings
 
-The Schedule, Part A in the Gazette displays all 23 Government Pay Levels. The following table transcribes the column headings and first cell (entry pay) visible on printed pages 12–14. The lookup generates the remaining cell values from the published entry pay using a 3% increment rounded to the nearest ₹100, then added to the current cell. This progression matches the tabulated schedule at tested points; a full independent cell-by-cell transcription and second review remain pending.
+The Schedule, Part A in the Gazette displays all 23 Government Pay Levels. The following table transcribes the column headings and first cell (entry pay) visible on printed pages 12–14. The lookup generates the remaining cell values from the published entry pay using a 3% increment rounded to the nearest ₹100, then added to the current cell. Every one of the 549 cells in the 16 Levels shared with State Bank Annexure-I matches the corresponding value in that official cross-reference. The seven Gazette-only Levels (1, 2, 3, 8, 13, 18 and 23) still require an independent second transcription check against the Gazette page images.
 
 | Pay Level | Grade Pay (₹) | Cell 1 / entry pay (₹) |
 |---:|---:|---:|
@@ -95,7 +95,7 @@ The State Bank PDF presents these 16 Levels:
 
 These headings and entry-pay figures are transcribed from the State Bank PDF. The displayed levels form a selected subset; the PDF does not display every Level in Gazette Part A. In particular, Gazette Part A also includes Levels 1, 2, 3, 8, 13, 18 and 23. A calculator intended for the full Government of Sikkim employee population must not silently treat the State Bank PDF's 16-level presentation as an exhaustive replacement for the Gazette schedule.
 
-The State Bank PDF is an official State Bank of Sikkim matrix publication, and its displayed Level/Grade Pay/entry-pay combinations correspond to the matching columns in Gazette Part A. The Gazette separately contains the full Government schedule, while the Bank PDF shows 16 selected Levels. Both sources are retained as distinct official source records. A full cell-by-cell comparison and confirmation of the intended employee categories are still required before treating the two datasets as interchangeable for a particular calculator scenario.
+The State Bank PDF is an official State Bank of Sikkim matrix publication, and its displayed Level/Grade Pay/entry-pay combinations correspond to the matching columns in Gazette Part A. The Gazette separately contains the full Government schedule, while the Bank PDF shows 16 selected Levels. Both sources are retained as distinct official source records. A test-only transcription fixture now records every cell visible in the two-page Bank PDF. The automated comparison checks all 549 published cells: 320 cells on page 1 and 229 cells on page 2. Every value matches the corresponding cell in the Gazette-based lookup; no mismatch was found. The fixture is in tests/fixtures/state-bank-annexure-i.js, and the comparison is enforced by tests/pay-matrix-source-audit.test.mjs. This cross-check covers only the 16 shared Levels. Gazette Levels 1, 2, 3, 8, 13, 18 and 23 do not appear in the Bank PDF and still require an independent second transcription check. The Bank PDF is not treated as an exhaustive replacement for the Gazette schedule, and this comparison does not determine employee applicability.
 
 ## 3. Part B: specified upgraded posts
 
@@ -146,7 +146,7 @@ A Department of Personnel clarification titled **Effect of EOL on the date of an
 
 ## 5. Implementation controls
 
-1. Store the Gazette Part A matrix and the State Bank Annexure-I cross-reference as separately sourced datasets until the full cell-by-cell comparison is signed off.
+1. Keep the Gazette Part A matrix and State Bank Annexure-I cross-reference as separately sourced datasets. The 549 cells published in the Bank's 16 selected Levels have passed the cross-check; do not treat the Bank schedule as a replacement for the seven Gazette-only Levels or as an employee-applicability decision.
 2. Preserve each Level's own available cell count. Do not pad a shorter column with inferred values or assume every Level has the same number of cells.
 3. Keep Part B post-specific upgraded Levels separate from the Part A baseline Level/Grade Pay mapping.
 4. Do not infer a post's Level from job title alone. Require a verified cadre/post mapping or accept a user-entered basic pay with an explicit manual-entry label.
@@ -157,11 +157,11 @@ A Department of Personnel clarification titled **Effect of EOL on the date of an
 
 | Dataset | Status | Next verification step |
 |---|---|---|
-| Gazette Part A level headings, Grade Pay mapping, Cell 1 and column lengths | Transcribed into lookup data | Independent second check against page images |
-| Gazette Part A subsequent cells | Generated using 3% progression rounded to nearest ₹100; representative values and terminal cells tested | Full independent cell-by-cell transcription and comparison |
-| State Bank Annexure-I headings and entry pay | Initial transcription complete | Independently compare every Level and every cell with the published PDF |
+| Gazette Part A level headings, Grade Pay mapping, Cell 1 and column lengths | Transcribed into lookup data for all 23 Levels | Independent second transcription check against Gazette page images |
+| Gazette Part A subsequent cells | Generated using 3% progression rounded to nearest ₹100 | Independently transcribe/check the seven Gazette-only Levels: 1, 2, 3, 8, 13, 18 and 23 |
+| State Bank Annexure-I headings and all published cells | 16 Levels and 549 cells transcribed into a test-only fixture; all 549 values match the corresponding Gazette-based lookup values | Maintain the regression fixture; separately complete the seven Gazette-only Level checks |
 | Gazette Part B specified-post upgrades | All 24 entries on printed page 15 transcribed into a separate reference | Independent second check and review later orders affecting individual posts |
 | Employee-category applicability | Base Rule 2 reviewed | Identify exceptions and any later orders for the MVP employee groups |
 | Annual increment / EOL treatment | Clarification located | Capture issue date, qualifying-service details and full scope from original circular |
 
-The current lookup is a reference tool and does not infer employee applicability or calculate official salary. Do not treat it as a fully verified salary-engine dataset until the independent cell-by-cell comparison and employee-category review are complete.
+The current lookup is a reference tool and does not infer employee applicability or calculate official salary. Although all 549 cells in the Bank's selected 16 Levels match the Gazette-based lookup, the seven Gazette-only Levels and employee-category applicability still require review. Do not treat the matrix as a fully verified salary-engine dataset.

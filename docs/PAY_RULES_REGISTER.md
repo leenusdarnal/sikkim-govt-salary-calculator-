@@ -19,8 +19,8 @@ News reports, third-party calculators, social posts and informal messages may he
 
 | Source | Details established | Status |
 |---|---|---|
-| [Sikkim Government Services (Revised Pay) Rules, 2018 — Gazette No. 333](https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf) | Notification No. 56/GEN/DOP, dated 23/06/2018; deemed effective from 01/01/2016; Rules 1–6, Schedule Part A (Levels 1–23), Part B (specified post upgrades) and Appendix C reviewed | Base rules and schedule located/reviewed; complete cell transcription and employee-category verification pending |
-| [State Bank of Sikkim Pay Matrix — Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) | Two-page table with Pay Band, Grade Pay, Level, entry pay and selected vertical cell values; displays 16 Levels | Initial headings/entry-pay transcription completed; full cell comparison with Gazette Part A pending |
+| [Sikkim Government Services (Revised Pay) Rules, 2018 — Gazette No. 333](https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf) | Notification No. 56/GEN/DOP, dated 23/06/2018; deemed effective from 01/01/2016; Rules 1–6, Schedule Part A (Levels 1–23), Part B (specified post upgrades) and Appendix C reviewed | Base rules and schedule located/reviewed; 549 cells in the 16 Levels shared with the State Bank annexure cross-checked with no mismatch; seven Gazette-only Levels still need independent second checking and employee-category verification remains pending |
+| [State Bank of Sikkim Pay Matrix — Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) | Two-page table with Pay Band, Grade Pay, Level, entry pay and all published vertical cell values for 16 Levels | All 549 cells recorded in a test-only fixture and matched against the corresponding Gazette-based lookup values; automated regression test added |
 | [DOP Notification No. 109/GEN/DOP and OM No. 6412/GEN/DOP](https://dop.sikkim.gov.in/notificationdoc/109.pdf) | One-time induction measure for specified regular-establishment employees in Levels 1/2/3 who completed six years of regular service as on 31/12/2025; OM issued 25/09/2025 | Reviewed for employee-applicability context; does not amend matrix values |
 | [Notification No. 99/GEN/DOP dated 06/02/2020 — DOP archive](https://dop.sikkim.gov.in/visitor/notifications) | Official archive lists the notification. A readable non-government copy states that specified regularised employees restore their original designation and become eligible for the original Pay Level prescribed for the post after five years, under OM No. 5339/GEN/DOP dated 11/02/2019 | Official archive listing confirmed; original signed PDF and 2019 OM not yet obtained/verified; not implementation-ready |
 | [DOP Office Memorandum No. 2026/GEN/DOP](https://dop.sikkim.gov.in/notificationdoc/2026.pdf) | Dated 20/03/2026; sets a distinct pay progression for the four-year Group C/D category, eligible land-donor appointees and eligible temporary employees with benchmark disabilities: first year at temporary-capacity pay, next four years in applicable Level 1/2/3, and after five years under Notification No. 99/GEN/DOP | Source reviewed; downstream Notification No. 99 and referenced regularisation/scheme notifications still require review; not implemented in calculator |
@@ -29,7 +29,7 @@ News reports, third-party calculators, social posts and informal messages may he
 
 ### Important distinction between the two matrix PDFs
 
-The Gazette contains the Government of Sikkim's full Schedule Part A with Levels 1–23 and a separate Part B for upgraded Levels for specified posts. The State Bank of Sikkim Annexure-I displays a selected subset of 16 Levels. The State Bank PDF is preserved as an official cross-reference, but it is not treated as an exhaustive replacement for the Gazette schedule. See [PAY_MATRIX_SOURCE_AUDIT.md](PAY_MATRIX_SOURCE_AUDIT.md) for the transcribed Level/Grade Pay/entry-pay cross-reference and the verification gaps.
+The Gazette contains the Government of Sikkim's full Schedule Part A with Levels 1–23 and a separate Part B for upgraded Levels for specified posts. The State Bank of Sikkim Annexure-I displays a selected subset of 16 Levels. All 549 cells published in the Bank annexure have been compared with the matching Gazette-based lookup values, with no discrepancy. Levels 1, 2, 3, 8, 13, 18 and 23 are absent from the Bank PDF and remain open for independent second transcription. The Bank PDF is not treated as an exhaustive replacement for the Gazette schedule. See [PAY_MATRIX_SOURCE_AUDIT.md](PAY_MATRIX_SOURCE_AUDIT.md) for the detailed comparison and verification gaps.
 
 ## Special employee-applicability pathways identified
 
@@ -80,7 +80,7 @@ The links above are starting points, not confirmation of any particular allowanc
 
 | Rule area | Information to verify | Status |
 |---|---|---|
-| Pay structure | Applicable pay rules, pay levels, cells, minimum/maximum and conversion/fixation rules | Base 2018 rules and Gazette matrix reviewed; full cell transcription and post applicability pending |
+| Pay structure | Applicable pay rules, pay levels, cells, minimum/maximum and conversion/fixation rules | Base 2018 rules and Gazette matrix reviewed; 549 shared cells cross-checked with no mismatch; seven Gazette-only Levels and post applicability still need review |
 | Employee applicability | Covered services/posts, exclusions, work-charged employees, post-specific upgrades and later induction/regularisation measures | Base Rule 2, Part B, 2025 one-time induction notification and 2026 regularisation OM reviewed; individual category/cadre mapping and underlying referenced notifications pending |
 | Annual increment | Rate, date, eligibility, withholding and special cases | DOP clarification No. 6780/GEN/DOP dated 27/10/2025 reviewed; qualifying-service and EOL edge-case treatment remains to be independently checked before implementation |
 | Dearness allowance | Rate by effective date, calculation base, rounding and arrears treatment | Pending |
@@ -95,7 +95,7 @@ The links above are starting points, not confirmation of any particular allowanc
 | Rounding | Component-wise and final rounding conventions | Pending |
 | Arrears | Retrospective orders, month-by-month calculation and adjustment handling | Later phase |
 
-**Important:** No allowance or deduction rate is ready for use in the salary engine. Matrix values must not be consumed by the application until the complete cell transcription has been independently checked.
+**Important:** No allowance or deduction rate is ready for use in the salary engine. The 549-cell cross-check covers only the 16 Levels also published by the State Bank. Do not use the matrix as a fully verified salary-engine dataset until the seven Gazette-only Levels and employee applicability have been independently checked.
 
 ## Evidence record template
 
