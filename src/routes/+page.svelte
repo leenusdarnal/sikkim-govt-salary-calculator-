@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { calculateSalary } from '../lib/salary-calculation.js';
   import { getPayCell, getPayLevel, PAY_LEVELS } from '../lib/pay-matrix.js';
-  import { nextTheme } from '../lib/theme.js';
+  import { nextTheme, resolveTheme } from '../lib/theme.js';
   import { createManualEstimateStatement, hasValidManualEstimateInputs } from '../lib/estimate-statement.js';
 
   let basicPay = 0;
@@ -19,8 +19,15 @@
   $: canPrint = hasValidManualEstimateInputs({ basicPay, allowances, deductions });
 
   onMount(() => {
-    isDark = document.documentElement.dataset.theme === 'dark';
     const systemPreference = window.matchMedia('(prefers-color-scheme: dark)');
+    let savedTheme: string | null = null;
+    try {
+      savedTheme = localStorage.getItem('sikkim-salary-theme');
+    } catch {
+      // The early HTML bootstrap already selected the system theme.
+    }
+    applyTheme(resolveTheme(savedTheme, systemPreference.matches ? 'dark' : 'light'));
+
     const followSystemTheme = (event: MediaQueryListEvent) => {
       let savedTheme: string | null = null;
       try {
