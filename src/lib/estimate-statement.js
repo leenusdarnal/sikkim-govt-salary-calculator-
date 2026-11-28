@@ -45,7 +45,7 @@ export function createManualEstimateStatement(calculation) {
       },
       {
         id: 'deductions',
-        label: 'Deductions (user-entered)',
+        label: 'Deductions (input, capped at gross pay)',
         amount: calculation.deductions,
         deduction: true
       },
