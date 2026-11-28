@@ -108,7 +108,7 @@ The Gazette's Schedule, Part B (printed page 15) is a separate table of upgraded
 | Ministerial and Executive Service | Head Assistant | 3,400 | 3,800 | 11 | 5.11 |
 | Ministerial and Executive Service | Inspector | 3,800 | 4,200 | 12 | 5.11 |
 | Ministerial and Executive Service | Office Superintendent | 4,200 | 4,600 | 14 | 5.11 |
-| HRDD, Food Security & Agriculture Development, Horticulture & Cash Crops Development, and Animal Husbandry, Livestock, Fisheries & Veterinary Services Departments | Laboratory Attendant | 2,200 | 2,400 | 6 | 5.14 |
+| HRDD, Food Security & Agriculture Development Department, Horticulture & Cash Crops Development Department and Animal Husbandry, Livestock, Fisheries & Veterinary Services Department | Laboratory Attendant | 2,200 | 2,400 | 6 | 5.14 |
 | Food Security and Agriculture Development and Horticulture & Cash Crops Development Departments | Field Assistant | 2,300 | 2,400 | 6 | 5.15 |
 | Excise (Abkari) Department | Head Constable | 3,000 | 3,400 | 10 | 5.33 |
 | Excise (Abkari) Department | Assistant Sub-Inspector | 3,000 | 3,800 | 11 | 5.33 |
