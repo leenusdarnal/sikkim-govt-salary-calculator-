@@ -4,6 +4,7 @@ import { getPayLevel, PAY_LEVELS } from '../src/lib/pay-matrix.js';
 import { STATE_BANK_ANNEXURE } from './fixtures/state-bank-annexure-i.js';
 
 const EXPECTED_SHARED_LEVELS = [4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 19, 20, 21, 22];
+/** @type {Record<number, number>} */
 const EXPECTED_CELL_COUNTS = {
   4: 40, 5: 40, 6: 40, 7: 40, 9: 40, 10: 40, 11: 40, 12: 40,
   14: 40, 15: 36, 16: 35, 17: 32, 19: 26, 20: 23, 21: 19, 22: 18
@@ -32,7 +33,10 @@ test('cross-checks every State Bank Annexure-I cell against the matching Gazette
 
       row.forEach((sourceValue, columnIndex) => {
         const levelNumber = page.levels[columnIndex];
-        const generatedValue = getPayLevel(levelNumber).cells[rowIndex];
+        assert.ok(levelNumber !== undefined, `Missing Level mapping for source column ${columnIndex + 1}`);
+        const level = getPayLevel(levelNumber);
+        assert.ok(level, `Gazette Level ${levelNumber} must exist`);
+        const generatedValue = level?.cells[rowIndex];
         assert.equal(
           generatedValue,
           sourceValue,
