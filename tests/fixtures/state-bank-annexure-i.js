@@ -11,10 +11,12 @@
  * verification tests only and is not used by the salary calculator.
  */
 
+/** @param {string} source @returns {number[][]} */
 function parseRows(source) {
   return source.trim().split("\n").map((line) => line.trim().split(/\s+/).map(Number));
 }
 
+/** @type {{ pages: readonly { pdfPage: number, levels: readonly number[], rows: readonly (readonly number[])[] }[] }} */
 export const STATE_BANK_ANNEXURE = Object.freeze({
   pages: Object.freeze([
     Object.freeze({
