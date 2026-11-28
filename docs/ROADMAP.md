@@ -29,21 +29,26 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 - [x] Add dependency lockfile and switch CI/deployment installation to npm ci.
 - [ ] Add linting and formatting.
 - [ ] Establish the complete folder structure for routes, components, domain logic and rules data.
-- [x] Add responsive layout, typography, accessible form controls and number formatting.\n- [x] Add system-aware, persistent light/dark mode with accessible inline icons.
+- [x] Add responsive layout, typography, accessible form controls and number formatting.
+- [x] Add system-aware, persistent light/dark mode with accessible inline icons.
 - [ ] Confirm Cloudflare deployment strategy and static/server requirements.
 
 ## Phase 2 — Pay matrix
 
 **Outcome:** users can find and select basic pay using verified matrix data.
 
-- [ ] Add complete typed pay-level and cell data with source metadata.
-- [ ] Add pay-level/cell selector.
-- [ ] Add manual basic-pay entry and validation.
-- [ ] Display matrix version and official source.
-- [ ] Add data-integrity tests for every level and cell.
-- [ ] Keep Part B post-specific upgrades separate from the Part A base matrix.
+- [x] Add all 23 Gazette Part A Levels, Grade Pay, entry pay, and source-specific cell counts; generate cells with the documented progression and retain exact column lengths. Independent full cell-by-cell verification remains open in Phase 0.
+- [x] Add pay-level/cell selector and an explicit action to apply selected basic pay.
+- [x] Preserve manual basic-pay entry and validation.
+- [x] Display matrix version and official source.
+- [x] Add tests for all Level metadata, cell counts, invalid lookups, and every generated cell's progression, plus representative Gazette values.
+- [x] Keep Part B post-specific upgrades separate from the Part A base matrix.
 
-**Phase 2 limitation:** this is a source-linked lookup preview only. The full independent cell-by-cell audit and employee/post applicability review remain open; no allowance or deduction logic is implied.\n\n## Phase 3 — Monthly salary calculation
+**Phase 2 limitation:** this is a source-linked lookup preview only. The full independent cell-by-cell audit and employee/post applicability review remain open; no allowance or deduction logic is implied.
+
+**Phase 2 limitation:** this is a source-linked lookup preview only. The full independent cell-by-cell audit and employee/post applicability review remain open; no allowance or deduction logic is implied.
+
+## Phase 3 — Monthly salary calculation
 
 **Outcome:** core gross salary, deductions and estimated net salary.
 
