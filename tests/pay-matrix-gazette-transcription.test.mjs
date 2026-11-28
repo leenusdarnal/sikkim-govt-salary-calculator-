@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { getPayLevel } from '../src/lib/pay-matrix.js';
 import { GAZETTE_ONLY_LEVEL_TRANSCRIPTION } from './fixtures/gazette-part-a-only-levels.js';
 
+/** @type {Record<number, number>} */
 const EXPECTED_CELL_COUNTS = {
   1: 40, 2: 40, 3: 40, 8: 40, 13: 40, 18: 28, 23: 17
 };
@@ -23,7 +24,7 @@ test('matches every manually transcribed Gazette cell for Levels absent from the
 
     sourceLevel.cells.forEach((sourceValue, index) => {
       assert.equal(
-        payLevel.cells[index],
+        payLevel?.cells[index],
         sourceValue,
         `Gazette printed page ${sourceLevel.printedPage}, Level ${sourceLevel.level}, cell ${index + 1}`
       );
