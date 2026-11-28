@@ -1,14 +1,53 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { calculateSalary } from '../lib/salary-calculation.js';
+  import { getPayCell, getPayLevel, PAY_LEVELS } from '../lib/pay-matrix.js';
+  import { nextTheme } from '../lib/theme.js';
   import { createManualEstimateStatement, hasValidManualEstimateInputs } from '../lib/estimate-statement.js';
 
   let basicPay = 0;
   let allowances = 0;
   let deductions = 0;
+  let selectedLevel = 0;
+  let selectedCell = 1;
+  let isDark = false;
 
+  $: selectedPayLevel = getPayLevel(selectedLevel);
+  $: selectedPay = getPayCell(selectedLevel, selectedCell);
   $: calculation = calculateSalary({ basicPay, allowances, deductions });
   $: statement = createManualEstimateStatement(calculation);
   $: canPrint = hasValidManualEstimateInputs({ basicPay, allowances, deductions });
+
+  onMount(() => {
+    isDark = document.documentElement.dataset.theme === 'dark';
+  });
+
+  function toggleTheme() {
+    const theme = nextTheme(isDark ? 'dark' : 'light');
+    isDark = theme === 'dark';
+    document.documentElement.dataset.theme = theme;
+
+    const scheme = document.querySelector('meta[name="color-scheme"]');
+    scheme?.setAttribute('content', theme);
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    themeColor?.setAttribute('content', theme === 'dark' ? '#0d1714' : '#173b34');
+
+    try {
+      localStorage.setItem('sikkim-salary-theme', theme);
+    } catch {
+      // The current page still changes theme if browser storage is unavailable.
+    }
+  }
+
+  function handleLevelChange(event: Event) {
+    const value = (event.currentTarget as HTMLSelectElement).value;
+    selectedLevel = value ? Number(value) : 0;
+    selectedCell = 1;
+  }
+
+  function applySelectedPay() {
+    if (selectedPay !== undefined) basicPay = selectedPay;
+  }
 
   const money = (value: number) =>
     new Intl.NumberFormat('en-IN', {
@@ -29,7 +68,28 @@
       <span class="mark" aria-hidden="true">₹</span>
       <span>Sikkim Salary Calculator</span>
     </a>
-    <span class="status">Early preview</span>
+    <div class="topbar-actions">
+      <span class="status">Early preview</span>
+      <button
+        type="button"
+        class="theme-toggle"
+        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        aria-pressed={isDark}
+        title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        onclick={toggleTheme}
+      >
+        {#if isDark}
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+          </svg>
+        {:else}
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z" />
+          </svg>
+        {/if}
+      </button>
+    </div>
   </header>
 
   <section class="intro" id="main">
@@ -52,6 +112,41 @@
         </div>
         <span class="step">01 / 01</span>
       </div>
+
+      <section class="matrix-lookup" aria-labelledby="matrix-title">
+        <div class="matrix-heading">
+          <div>
+            <p class="eyebrow">Gazette No. 333 · Schedule Part A</p>
+            <h3 id="matrix-title">Pay matrix lookup</h3>
+          </div>
+          <span class="matrix-badge">2018 rules</span>
+        </div>
+        <div class="matrix-fields">
+          <label for="pay-level">Pay level</label>
+          <select id="pay-level" bind:value={selectedLevel} onchange={(event) => { selectedLevel = Number((event.currentTarget as HTMLSelectElement).value); selectedCell = 1; }}>
+            <option value={0}>Choose a level</option>
+            {#each PAY_LEVELS as level (level.level)}
+              <option value={level.level}>Level {level.level}</option>
+            {/each}
+          </select>
+          <label for="pay-cell">Cell</label>
+          <select id="pay-cell" bind:value={selectedCell} disabled={!selectedPayLevel}>
+            {#each selectedPayLevel?.cells ?? [] as amount, index (index)}
+              <option value={index + 1}>Cell {index + 1} · {money(amount)}</option>
+            {/each}
+          </select>
+        </div>
+        <div class="matrix-selection">
+          {#if selectedPayLevel && selectedPay !== undefined}
+            <p>Level {selectedLevel} · Cell {selectedCell} <span>Grade Pay ₹{selectedPayLevel.gradePay.toLocaleString('en-IN')}</span></p>
+            <strong>{money(selectedPay)}</strong>
+          {:else}
+            <p>Select a level and cell to look up basic pay.</p>
+          {/if}
+          <button type="button" class="matrix-use" disabled={selectedPay === undefined} onclick={applySelectedPay}>Use selected basic pay</button>
+        </div>
+        <p class="matrix-source">Cell progression follows 3% increments rounded to the nearest ₹100. This lookup does not determine which level applies to a post. <a href="https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf" target="_blank" rel="noreferrer">Official Gazette PDF</a>.</p>
+      </section>
 
       <label for="basic-pay">Basic pay <span>₹</span></label>
       <input id="basic-pay" class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" type="number" min="0" step="1" bind:value={basicPay} inputmode="decimal" aria-invalid={!Number.isFinite(basicPay) || basicPay < 0} aria-describedby={!Number.isFinite(basicPay) || basicPay < 0 ? "basic-pay-error" : undefined} placeholder="e.g. 56000" />
@@ -121,11 +216,18 @@
   :global(*) { box-sizing: border-box; }
   :global(body) { margin: 0; background: #f4f7f5; color: #172a26; font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
   :global(button), :global(input) { font: inherit; }
+  :global(html) { color-scheme: light; }
+  :global(html[data-theme="dark"]) { color-scheme: dark; }
   .shell { width: min(1120px, calc(100% - 36px)); margin: 0 auto; }
   .topbar { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #dfe7e2; }
   .brand { display: inline-flex; align-items: center; gap: 11px; color: #173b34; font-weight: 750; text-decoration: none; letter-spacing: -.02em; }
   .mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; color: white; background: #173b34; font-size: 21px; }
   .status { padding: 6px 11px; border: 1px solid #cddbd4; border-radius: 999px; color: #45665a; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .topbar-actions { display: flex; align-items: center; gap: 10px; }
+  .theme-toggle { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid #cddbd4; border-radius: 12px; color: #24483e; background: #fff; cursor: pointer; }
+  .theme-toggle svg { width: 20px; height: 20px; }
+  .theme-toggle:hover { background: #edf4f0; }
+  .theme-toggle:focus-visible { outline: 2px solid #377b68; outline-offset: 3px; }
   .intro { padding: 54px 0 28px; max-width: 800px; }
   .eyebrow { margin: 0 0 9px; color: #477366; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
   h1 { margin: 0; color: #173b34; font-size: clamp(34px, 6vw, 58px); line-height: 1.08; letter-spacing: -.05em; }
@@ -136,6 +238,25 @@
   .calculator { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr); overflow: hidden; border: 1px solid #dce6e0; border-radius: 18px; background: white; box-shadow: 0 12px 32px rgb(23 59 52 / 5%); }
   .form-panel { padding: clamp(22px, 4vw, 36px); }
   .section-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
+  .matrix-lookup { margin: 0 0 25px; padding: 16px; border: 1px solid #dce6e0; border-radius: 12px; background: #f8faf9; }
+  .matrix-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .matrix-heading .eyebrow { margin-bottom: 4px; font-size: 9px; }
+  .matrix-heading h3 { margin: 0; color: #173b34; font-size: 17px; letter-spacing: -.02em; }
+  .matrix-badge { padding: 4px 7px; border-radius: 6px; background: #e7efeb; color: #47665b; font-size: 10px; font-weight: 700; white-space: nowrap; }
+  .matrix-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; margin-top: 9px; }
+  .matrix-fields label { margin-top: 13px; font-size: 11px; }
+  .matrix-fields select { width: 100%; min-width: 0; min-height: 43px; padding: 9px 10px; border: 1px solid #d4dfd8; border-radius: 8px; background: #fff; color: #172a26; font: inherit; font-size: 12px; }
+  .matrix-fields select:focus-visible { outline: 2px solid #377b68; outline-offset: 2px; }
+  .matrix-fields select:disabled { opacity: .55; }
+  .matrix-selection { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 13px; border-top: 1px solid #dce6e0; }
+  .matrix-selection p { margin: 0; color: #536b61; font-size: 11px; }
+  .matrix-selection p span { display: block; color: #87968f; }
+  .matrix-selection strong { color: #173b34; font-size: 18px; font-variant-numeric: tabular-nums; }
+  .matrix-use { width: 100%; min-height: 40px; padding: 9px 12px; border: 0; border-radius: 8px; color: white; background: #1b6653; font-size: 12px; font-weight: 750; cursor: pointer; }
+  .matrix-use:hover:not(:disabled) { background: #174f42; }
+  .matrix-use:disabled { opacity: .45; cursor: not-allowed; }
+  .matrix-source { margin: 12px 0 0; color: #7b8982; font-size: 10px; line-height: 1.5; }
+  .matrix-source a { color: #1b6653; font-weight: 700; text-underline-offset: 2px; }
   h2 { margin: 0; font-size: 23px; line-height: 1.2; letter-spacing: -.03em; }
   .step { color: #87968f; font-size: 11px; font-weight: 750; letter-spacing: .08em; white-space: nowrap; }
   label { display: flex; justify-content: space-between; margin: 18px 0 7px; color: #314b42; font-size: 13px; font-weight: 700; }
@@ -170,7 +291,54 @@
   .next a { color: #1b6653; font-size: 13px; font-weight: 750; text-underline-offset: 4px; }
   footer { display: flex; justify-content: space-between; gap: 12px; padding: 20px 0 28px; border-top: 1px solid #dfe7e2; color: #829087; font-size: 11px; }
   @media (max-width: 720px) { .intro { padding-top: 38px; } .calculator { grid-template-columns: 1fr; } .result-panel { min-height: 410px; } footer { flex-direction: column; } }
+  @media (max-width: 420px) { .topbar-actions { gap: 7px; } .theme-toggle { width: 36px; height: 36px; } .matrix-lookup { padding: 13px; } .matrix-fields { gap: 0 8px; } }
   @media (max-width: 420px) { .shell { width: calc(100% - 24px); } .brand { font-size: 13px; } .mark { width: 34px; height: 34px; } .status { font-size: 10px; } .desktop-break { display: none; } }
+
+  :global(html[data-theme="dark"] body) { background: #0d1714; color: #e5eee9; }
+  :global(html[data-theme="dark"]) .topbar { border-color: #2b3d36; }
+  :global(html[data-theme="dark"]) .brand { color: #dce9e2; }
+  :global(html[data-theme="dark"]) .mark { color: #173b34; background: #cce4d8; }
+  :global(html[data-theme="dark"]) .status { border-color: #3b554a; color: #c0d5ca; }
+  :global(html[data-theme="dark"]) .theme-toggle { border-color: #40564b; color: #e4eee8; background: #172720; }
+  :global(html[data-theme="dark"]) .theme-toggle:hover { background: #23372e; }
+  :global(html[data-theme="dark"]) .theme-toggle:focus-visible { outline-color: #8ed8bc; }
+  :global(html[data-theme="dark"]) .eyebrow { color: #91c8b3; }
+  :global(html[data-theme="dark"]) h1, :global(html[data-theme="dark"]) .next h2 { color: #e4f0e9; }
+  :global(html[data-theme="dark"]) .lead, :global(html[data-theme="dark"]) .next p:not(.eyebrow) { color: #a9bcb2; }
+  :global(html[data-theme="dark"]) .preview-note { border-color: #5c4c2b; background: #282318; color: #e5d6ad; }
+  :global(html[data-theme="dark"]) .note-icon { border-color: #9a814b; }
+  :global(html[data-theme="dark"]) .calculator { border-color: #2a3b33; background: #14221c; box-shadow: 0 12px 32px rgb(0 0 0 / 20%); }
+  :global(html[data-theme="dark"]) h2 { color: #e4eee8; }
+  :global(html[data-theme="dark"]) .step { color: #8ea198; }
+  :global(html[data-theme="dark"]) label { color: #c8d9d0; }
+  :global(html[data-theme="dark"]) label span { color: #8ea198; }
+  :global(html[data-theme="dark"]) input { border-color: #3a4d43; background: #101b16; color: #edf4f0; }
+  :global(html[data-theme="dark"]) input:focus { border-color: #78bda5; box-shadow: 0 0 0 3px rgb(120 189 165 / 18%); background: #111f18; }
+  :global(html[data-theme="dark"]) input::placeholder { color: #7f9288; }
+  :global(html[data-theme="dark"]) .helper { color: #9aaca2; }
+  :global(html[data-theme="dark"]) .field-error { color: #ffb4a9; }
+  :global(html[data-theme="dark"]) .result-panel { background: #102b22; }
+  :global(html[data-theme="dark"]) .breakdown { border-color: #34574a; }
+  :global(html[data-theme="dark"]) .breakdown .total { border-color: #527568; }
+  :global(html[data-theme="dark"]) .print-action { border-color: #8bb9a6; color: #102b22; background: #e2f1e9; }
+  :global(html[data-theme="dark"]) .print-action:hover:not(:disabled) { background: #cde6d9; }
+  :global(html[data-theme="dark"]) .reset { color: #c7ded2; }
+  :global(html[data-theme="dark"]) .next a { color: #8ed8bc; }
+  :global(html[data-theme="dark"]) footer { border-color: #2b3d36; color: #8fa198; }
+  :global(html[data-theme="dark"]) .matrix-lookup { border-color: #2d4237; background: #101b16; }
+  :global(html[data-theme="dark"]) .matrix-heading h3 { color: #e4eee8; }
+  :global(html[data-theme="dark"]) .matrix-badge { background: #263a30; color: #bdd8ca; }
+  :global(html[data-theme="dark"]) .matrix-fields select { border-color: #3a4d43; background: #0d1714; color: #edf4f0; }
+  :global(html[data-theme="dark"]) .matrix-fields select:focus-visible { outline-color: #8ed8bc; }
+  :global(html[data-theme="dark"]) .matrix-selection { border-color: #2d4237; }
+  :global(html[data-theme="dark"]) .matrix-selection p { color: #b4c8bd; }
+  :global(html[data-theme="dark"]) .matrix-selection p span { color: #8fa198; }
+  :global(html[data-theme="dark"]) .matrix-selection strong { color: #e4eee8; }
+  :global(html[data-theme="dark"]) .matrix-use { background: #28735c; }
+  :global(html[data-theme="dark"]) .matrix-use:hover:not(:disabled) { background: #338568; }
+  :global(html[data-theme="dark"]) .matrix-source { color: #93a69b; }
+  :global(html[data-theme="dark"]) .matrix-source a { color: #8ed8bc; }
+
   @media print {
     @page { margin: 18mm; }
     :global(body) { margin: 0; background: white !important; color: #111 !important; font-size: 12pt; }
