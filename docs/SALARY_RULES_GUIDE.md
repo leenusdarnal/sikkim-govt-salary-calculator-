@@ -40,9 +40,10 @@ Part B is a separate schedule of upgraded Levels for specified posts. All 24 ent
 
 ### Other located DOP material
 
-- Notification No. 109/GEN/DOP and OM No. 6412/GEN/DOP, dated 25 September 2025, concern a one-time induction measure for specified regular-establishment employees in Levels 1–3 who completed six years of regular service as on 31 December 2025. This does not amend matrix cell values.
-- DOP clarification No. 6780/GEN/DOP concerns the effect of Extra Ordinary Leave on annual increment. The issue date and complete applicability details still need to be captured from the original circular before increment logic is implemented.
-
+- **Office Memorandum No. 2026/GEN/DOP dated 20 March 2026:** covers three regularisation pathways: the four-year Group C/D category, eligible land-donor appointees with three years of continuous temporary service, and eligible temporary employees with benchmark disabilities with two or more years in the particular post. It states that the first year after regularisation is paid at the temporary-capacity amount; after one successful year of regular service the employee is placed in the applicable Level 1/2/3 for the next four years; and after five years of regular service pay is regulated under Notification No. 99/GEN/DOP dated 06/02/2020. The original Notification No. 99/GEN/DOP and the underlying eligibility notifications still need to be obtained and reviewed. Do not implement this progression as an automatic rule yet.
+- **Notification No. 109/GEN/DOP and OM No. 6412/GEN/DOP, both dated 25 September 2025:** provide a one-time cadre-induction process for employees already brought into the regular establishment in Levels 1–3 who completed six years of regular service as on 31 December 2025. The OM describes preparation/finalisation of seniority lists and induction in accordance with cadre recruitment rules without relaxing prescribed qualifications. This is a cadre process, not a general Part A matrix amendment.
+- **Clarification No. 6780/GEN/DOP dated 27 October 2025:** addresses the impact of EOL on annual increment dates (1 January / 1 July) and qualifying service in the relevant Level. Record it as a source note only until the qualifying-service calculation and individual leave/service-record treatment are independently checked.
+ 
 ## 3. What must not be assumed or implemented yet
 
 The reviewed matrix sources do not establish current allowance or deduction rates. Do not automatically apply DA, HRA, GIS, NPS, professional tax, or other deductions/allowances from the pay matrix. Each requires its own applicable primary source, effective date, calculation basis, eligibility and exceptions.
@@ -83,9 +84,9 @@ Manual basic-pay entry may be supported as a clearly labelled user-provided inpu
 | Gazette Part A full cell data | Pending | Transcribe and verify all Levels/cells |
 | State Bank Annexure-I | Initial headings/entry pay | Compare every cell with Gazette Part A |
 | Part B post mappings | 24 printed-page entries transcribed; second check pending | Independently verify each entry and review later orders |
-| Employee applicability | Base Rule 2 reviewed | Define MVP groups and map cadre/post evidence |
+| Employee applicability | Rule 2, Part B and later regularisation/induction measures reviewed as references | Obtain Notification No. 99/GEN/DOP and underlying scheme/regularisation orders; map individual cadre/post evidence |
 | Allowances and deductions | Pending | Locate primary orders and capture applicability/effective dates |
-| Increment/EOL treatment | Clarification located | Capture full details and applicability from original circular |
+| Increment/EOL treatment | Clarification No. 6780/GEN/DOP dated 27/10/2025 reviewed | Independently verify qualifying service and edge cases before implementing increment logic |
 | Rounding, exceptions and sample cases | Pending | Verify from sources and independently check scenarios |
 
 See [PAY_MATRIX_SOURCE_AUDIT.md](PAY_MATRIX_SOURCE_AUDIT.md), [PAY_RULES_REGISTER.md](PAY_RULES_REGISTER.md), and [ROADMAP.md](ROADMAP.md) for the detailed audit, evidence register and phase checklist.
@@ -95,6 +96,7 @@ See [PAY_MATRIX_SOURCE_AUDIT.md](PAY_MATRIX_SOURCE_AUDIT.md), [PAY_RULES_REGISTE
 - [Sikkim Government Services (Revised Pay) Rules, 2018 — Gazette No. 333](https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf)
 - [State Bank of Sikkim Pay Matrix — Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf)
 - [DOP Notification No. 109/GEN/DOP](https://dop.sikkim.gov.in/notificationdoc/109.pdf)
-- [DOP clarification No. 6780/GEN/DOP](https://dop.sikkim.gov.in/circular/6780.pdf)
+- [DOP Office Memorandum No. 2026/GEN/DOP](https://dop.sikkim.gov.in/notificationdoc/2026.pdf)
+- [DOP clarification No. 6780/GEN/DOP dated 27 October 2025](https://dop.sikkim.gov.in/circular/6780.pdf)
 
 The source audit records the current transcription status and additional official source locations. Re-open the original documents before making a new factual claim or changing a verification status.
