@@ -15,10 +15,15 @@ test('cross-checks every State Bank Annexure-I cell against the matching Gazette
   for (const page of STATE_BANK_ANNEXURE.pages) {
     assert.equal(page.rows.length, 40, `PDF page ${page.pdfPage} should have 40 cell rows`);
 
-    for (const levelNumber of page.levels) {
+    for (const [columnIndex, levelNumber] of page.levels.entries()) {
       const level = getPayLevel(levelNumber);
       assert.ok(level, `Gazette Level ${levelNumber} must exist`);
       assert.equal(level.cells.length, EXPECTED_CELL_COUNTS[levelNumber]);
+      assert.equal(
+        page.rows.filter((row) => columnIndex < row.length).length,
+        EXPECTED_CELL_COUNTS[levelNumber],
+        `State Bank fixture cell count for Level ${levelNumber}`
+      );
     }
 
     page.rows.forEach((row, rowIndex) => {
