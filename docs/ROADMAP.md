@@ -29,7 +29,7 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 - [x] Add dependency lockfile and switch CI/deployment installation to npm ci.
 - [ ] Add linting and formatting.
 - [ ] Establish the complete folder structure for routes, components, domain logic and rules data.
-- [ ] Add responsive layout, typography, accessible form controls and number formatting.
+- [x] Add responsive layout, typography, accessible form controls and number formatting.\n- [x] Add system-aware, persistent light/dark mode with accessible inline icons.
 - [ ] Confirm Cloudflare deployment strategy and static/server requirements.
 
 ## Phase 2 — Pay matrix
@@ -43,7 +43,7 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 - [ ] Add data-integrity tests for every level and cell.
 - [ ] Keep Part B post-specific upgrades separate from the Part A base matrix.
 
-## Phase 3 — Monthly salary calculation
+**Phase 2 limitation:** this is a source-linked lookup preview only. The full independent cell-by-cell audit and employee/post applicability review remain open; no allowance or deduction logic is implied.\n\n## Phase 3 — Monthly salary calculation
 
 **Outcome:** core gross salary, deductions and estimated net salary.
 
