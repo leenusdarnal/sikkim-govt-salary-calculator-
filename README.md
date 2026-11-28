@@ -35,7 +35,8 @@ The UI uses *Refactoring UI* as its design foundation: feature-first layouts, st
 - TypeScript
 - Tailwind CSS
 - Node's built-in test runner for calculation tests
-- GitHub Actions for pull-request validation and GitHub Pages deployment\n- System-aware light/dark mode with inline SVG icons and no added runtime dependency
+- GitHub Actions for pull-request validation and GitHub Pages deployment
+- System-aware light/dark mode with inline SVG icons and no added runtime dependency
 
 The first release is client-side and should not require an account or send personal salary inputs to a server. Hosting and deployment configuration can evolve as project requirements are confirmed.
 
@@ -45,7 +46,9 @@ The calculator is an informational tool, not a government payroll system. Offici
 
 The baseline legal source located is the [Sikkim Government Services (Revised Pay) Rules, 2018, Gazette No. 333](https://www.sikkim.gov.in/uploads/Gazette/333_20240813.pdf), Notification No. 56/GEN/DOP dated 23 June 2018. The rules are deemed effective from 1 January 2016 and contain the Government Pay Matrix in Schedule Part A and specified-post upgraded Levels in Part B.
 
-The current lookup's Level metadata and entry-pay values are transcribed from Gazette Schedule Part A. Subsequent cells are generated from the published entry values using the 3% increment progression rounded to the nearest ₹100, then added to the current cell; representative values and terminal cells are tested against the Gazette pages. A complete independent cell-by-cell comparison is still pending.\n\nThe [State Bank of Sikkim Pay Matrix, Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) is an officially published State Bank pay-matrix document. It displays 16 Levels, while Gazette Schedule Part A displays the wider Government matrix with 23 Levels. The overlapping Level, Grade Pay and entry-pay headings are recorded separately in the source audit; a full cell-by-cell comparison and employee-category applicability check are still pending.
+The current lookup's Level metadata and entry-pay values are transcribed from Gazette Schedule Part A. Subsequent cells are generated from the published entry values using the 3% increment progression rounded to the nearest ₹100, then added to the current cell; representative values and terminal cells are tested against the Gazette pages. A complete independent cell-by-cell comparison is still pending.
+
+The [State Bank of Sikkim Pay Matrix, Annexure-I](https://www.statebankofsikkim.com/SBSPAYMATRIX.pdf) is an officially published State Bank pay-matrix document. It displays 16 Levels, while Gazette Schedule Part A displays the wider Government matrix with 23 Levels. The overlapping Level, Grade Pay and entry-pay headings are recorded separately in the source audit; a full cell-by-cell comparison and employee-category applicability check are still pending.
 
 See [the pay matrix source audit](docs/PAY_MATRIX_SOURCE_AUDIT.md) and [the pay rules register](docs/PAY_RULES_REGISTER.md) for the source transcription, applicability findings and outstanding verification work. No DA, HRA, GIS, NPS, professional tax or other current allowance/deduction rate is asserted by this repository.
 
