@@ -46,8 +46,6 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 
 **Phase 2 limitation:** this is a source-linked lookup preview only. The full independent cell-by-cell audit and employee/post applicability review remain open; no allowance or deduction logic is implied.
 
-**Phase 2 limitation:** this is a source-linked lookup preview only. The full independent cell-by-cell audit and employee/post applicability review remain open; no allowance or deduction logic is implied.
-
 ## Phase 3 — Monthly salary calculation
 
 **Outcome:** core gross salary, deductions and estimated net salary.
