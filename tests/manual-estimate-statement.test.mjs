@@ -16,7 +16,7 @@ test('creates labelled statement lines from normalized calculation amounts', () 
     { id: 'basic-pay', label: 'Basic pay (user-entered)', amount: 56000 },
     { id: 'allowances', label: 'Allowances (user-entered)', amount: 12000 },
     { id: 'gross', label: 'Gross amount', amount: 68000, emphasis: true },
-    { id: 'deductions', label: 'Deductions (user-entered)', amount: 8500, deduction: true },
+    { id: 'deductions', label: 'Deductions (input, capped at gross pay)', amount: 8500, deduction: true },
     { id: 'net', label: 'Estimated net salary', amount: 59500, emphasis: true }
   ]);
 });
@@ -33,4 +33,18 @@ test('explicitly identifies the document as a manual estimate, not an official s
   assert.match(statement.disclaimer, /manual arithmetic estimate/i);
   assert.match(statement.disclaimer, /no verified.*allowance.*deduction/i);
   assert.match(statement.disclaimer, /not an official salary statement/i);
+});
+
+test('labels the deduction amount as capped at gross pay', () => {
+  const statement = createManualEstimateStatement({
+    basicPay: 1000,
+    allowances: 500,
+    gross: 1500,
+    deductions: 1500,
+    net: 0
+  });
+
+  const deductionsLine = statement.lines.find((line) => line.id === 'deductions');
+  assert.equal(deductionsLine.label, 'Deductions (input, capped at gross pay)');
+  assert.equal(deductionsLine.amount, 1500);
 });
