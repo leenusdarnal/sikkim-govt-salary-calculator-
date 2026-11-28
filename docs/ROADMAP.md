@@ -35,7 +35,7 @@ This roadmap is ordered by dependency. Dates are intentionally not assigned unti
 
 ## Phase 2 — Pay matrix
 
-**Outcome:** users can find and select basic pay using verified matrix data.
+**Outcome:** users can look up and select basic pay from the source-linked matrix preview; full independent verification and employee applicability remain open.
 
 - [x] Add all 23 Gazette Part A Levels, Grade Pay, entry pay, and source-specific cell counts; generate cells with the documented progression and retain exact column lengths. Independent full cell-by-cell verification remains open in Phase 0.
 - [x] Add pay-level/cell selector and an explicit action to apply selected basic pay.
