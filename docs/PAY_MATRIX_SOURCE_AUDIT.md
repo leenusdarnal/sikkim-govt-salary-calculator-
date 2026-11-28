@@ -1,6 +1,6 @@
 # Pay Matrix Source Audit
 
-**Status:** official sources located and reviewed; full cell-by-cell transcription and applicability review remain in progress.
+**Status:** official sources located and reviewed; full cell-by-cell transcription and applicability review remain in progress. See [SALARY_RULES_GUIDE.md](SALARY_RULES_GUIDE.md) for the implementation guardrails and ordered next steps.
 
 ## 1. Governing Government of Sikkim rules
 

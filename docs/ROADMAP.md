@@ -1,6 +1,6 @@
 # Implementation Roadmap
 
-This roadmap is ordered by dependency. Dates are intentionally not assigned until source verification and project scope are settled.
+This roadmap is ordered by dependency. Dates are intentionally not assigned until source verification and project scope are settled. The research baseline, evidence standard and next-step sequence are consolidated in [SALARY_RULES_GUIDE.md](SALARY_RULES_GUIDE.md).
 
 ## Phase 0 — Rules discovery and verification
 
