@@ -5,16 +5,17 @@ import {
   getApplicabilityGuidance
 } from '../src/lib/applicability-guidance.js';
 
-test('includes the three reviewed DOP employee-applicability instruments', () => {
+test('includes the four reviewed DOP employee-applicability instruments', () => {
   assert.deepEqual(
     APPLICABILITY_GUIDANCE.map(({ id }) => id),
     [
       'regularisation-pay-progression-2026',
       'one-time-cadre-induction-2025',
-      'eol-increment-clarification-2025'
+      'eol-increment-clarification-2025',
+      'regularisation-original-pay-level-2020'
     ]
   );
-  assert.equal(new Set(APPLICABILITY_GUIDANCE.map(({ id }) => id)).size, 3);
+  assert.equal(new Set(APPLICABILITY_GUIDANCE.map(({ id }) => id)).size, 4);
 });
 
 test('regularisation OM preserves the three covered pathways and all three pay stages', () => {
@@ -26,6 +27,16 @@ test('regularisation OM preserves the three covered pathways and all three pay s
   assert.match(guidance?.stages[2] ?? '', /99\/GEN\/DOP/);
   assert.match(guidance?.caution ?? '', /must be obtained and reviewed/i);
   assert.match(guidance?.sourceUrl ?? '', /notificationdoc\/2026\.pdf$/);
+});
+
+test('Notification 99 is explicitly provisional and cannot calculate original pay Level', () => {
+  const guidance = getApplicabilityGuidance('regularisation-original-pay-level-2020');
+  assert.equal(guidance?.calculationEnabled, false);
+  assert.match(guidance?.stages.join(' ') ?? '', /original Pay Level prescribed for the post/i);
+  assert.match(guidance?.stages.join(' ') ?? '', /5339\/GEN\/DOP/);
+  assert.match(guidance?.status ?? '', /official archive listing confirmed/i);
+  assert.match(guidance?.caution ?? '', /non-government copy/i);
+  assert.match(guidance?.sourceUrl ?? '', /visitor\/notifications$/);
 });
 
 test('one-time cadre induction is not described as a Part A pay-matrix amendment', () => {
