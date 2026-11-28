@@ -134,6 +134,8 @@ The table is transcribed from the Gazette page image. A second independent trans
 
 ## 4. Related Department of Personnel material found
 
+**Notification No. 99/GEN/DOP dated 6 February 2020:** the official DOP archive lists this notification. A readable non-government copy says specified regularised employees restore their original designation and become eligible for the original post Pay Level after five years, in accordance with OM No. 5339/GEN/DOP dated 11/02/2019. The original signed notification and 2019 OM are still unverified, so the transcription remains provisional.
+
 **Office Memorandum No. 2026/GEN/DOP dated 20 March 2026** addresses pay progression after regularisation for the four-year Group C/D regularisation category, eligible land-donor appointees and eligible temporary employees with benchmark disabilities. It prescribes temporary-capacity pay during the first year after regularisation, placement in the applicable Level 1/2/3 for the next four years after successful completion of one year of regular service, and regulation under Notification No. 99/GEN/DOP dated 06/02/2020 after five years of regular service. The original Notification No. 99/GEN/DOP and the referenced scheme/regularisation notifications still need to be obtained and reviewed; this pathway is not enabled in the calculator.
 
 
