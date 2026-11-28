@@ -1,6 +1,6 @@
 # Pay Matrix Source Audit
 
-**Status:** official sources located and reviewed; full cell-by-cell transcription and applicability review remain in progress. See [SALARY_RULES_GUIDE.md](SALARY_RULES_GUIDE.md) for the implementation guardrails and ordered next steps.
+**Status:** the application now exposes a 23-Level Part A lookup. Level, Grade Pay, entry pay and column lengths are transcribed; subsequent cells are generated using the 3% / nearest-₹100 progression visible in the schedule. Representative values and terminal cells are tested against Gazette pages 12–14. A complete independent cell-by-cell transcription and employee-applicability review remain pending. See [SALARY_RULES_GUIDE.md](SALARY_RULES_GUIDE.md) for implementation guardrails.
 
 ## 1. Governing Government of Sikkim rules
 
@@ -35,7 +35,7 @@ The notes to Rule 2 separately address work-charged establishment drawing pay in
 
 ## 2. Gazette Part A: complete Level / Grade Pay / entry-pay headings
 
-The Schedule, Part A in the Gazette displays all 23 Government Pay Levels. The following table transcribes the column headings and first cell (entry pay) visible on printed pages 12–14. This is a header/entry-pay transcription only; the remaining cells still require a full independent cell-by-cell comparison.
+The Schedule, Part A in the Gazette displays all 23 Government Pay Levels. The following table transcribes the column headings and first cell (entry pay) visible on printed pages 12–14. The lookup generates the remaining cell values from the published entry pay using a 3% increment rounded to the nearest ₹100, then added to the current cell. This progression matches the tabulated schedule at tested points; a full independent cell-by-cell transcription and second review remain pending.
 
 | Pay Level | Grade Pay (₹) | Cell 1 / entry pay (₹) |
 |---:|---:|---:|
@@ -63,7 +63,7 @@ The Schedule, Part A in the Gazette displays all 23 Government Pay Levels. The f
 | 22 | 9,500 | 120,500 |
 | 23 | 10,000 | 124,700 |
 
-The source schedule includes 40 cells in the lower-level columns and progressively fewer cells in several higher-level columns. The actual column lengths must be retained; blank cells are not valid pay values.
+The implemented column lengths are: Levels 1–14 = 40 cells each; Level 15 = 36; Level 16 = 35; Level 17 = 32; Level 18 = 28; Level 19 = 26; Level 20 = 23; Level 21 = 19; Level 22 = 18; Level 23 = 17. These lengths are kept as source metadata; blank cells are not valid pay values.
 
 ## 2. State Bank of Sikkim Pay Matrix reference
 
@@ -131,11 +131,11 @@ A Department of Personnel clarification titled **Effect of EOL on the date of an
 
 | Dataset | Status | Next verification step |
 |---|---|---|
-| Gazette Part A level headings, Grade Pay mapping and Cell 1 | Initial transcription complete | Independent second check against the page images |
-| Gazette Part A cell values | Not yet fully transcribed | Transcribe all Levels 1–23 and verify each cell |
+| Gazette Part A level headings, Grade Pay mapping, Cell 1 and column lengths | Transcribed into lookup data | Independent second check against page images |
+| Gazette Part A subsequent cells | Generated using 3% progression rounded to nearest ₹100; representative values and terminal cells tested | Full independent cell-by-cell transcription and comparison |
 | State Bank Annexure-I headings and entry pay | Initial transcription complete | Independently compare every Level and every cell with the published PDF |
 | Gazette Part B specified-post upgrades | Initial Excise rows transcribed | Review all other departments and obtain later orders affecting individual posts |
 | Employee-category applicability | Base Rule 2 reviewed | Identify exceptions and any later orders for the MVP employee groups |
 | Annual increment / EOL treatment | Clarification located | Capture issue date, qualifying-service details and full scope from original circular |
 
-No salary engine should consume a partially transcribed matrix. Pay Matrix v1 can proceed once the dataset is complete, independently checked and accompanied by tests for every Level/cell.
+The current lookup is a reference tool and does not infer employee applicability or calculate official salary. Do not treat it as a fully verified salary-engine dataset until the independent cell-by-cell comparison and employee-category review are complete.
