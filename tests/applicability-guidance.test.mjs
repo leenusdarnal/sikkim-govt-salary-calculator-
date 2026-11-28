@@ -50,7 +50,7 @@ test('all source notes are official URLs and immutable reference records', () =>
     assert.equal(Object.isFrozen(guidance), true);
     assert.equal(Object.isFrozen(guidance.applicability), true);
     assert.equal(Object.isFrozen(guidance.stages), true);
-    assert.equal(guidance.status.includes('automatic calculation'), true);
+    assert.equal(guidance.calculationEnabled, false);
   }
 });
 
