@@ -1,11 +1,13 @@
 <script lang="ts">
   import { calculateSalary } from '../lib/salary-calculation.js';
+  import { createManualEstimateStatement } from '../lib/estimate-statement.js';
 
   let basicPay = 0;
   let allowances = 0;
   let deductions = 0;
 
   $: calculation = calculateSalary({ basicPay, allowances, deductions });
+  $: statement = createManualEstimateStatement(calculation);
 
   const money = (value: number) =>
     new Intl.NumberFormat('en-IN', {
@@ -76,8 +78,28 @@
         <div><span>Deductions</span><strong>− {money(calculation.deductions)}</strong></div>
       </div>
       <div class="net-row"><span>Estimated net</span><strong>{money(calculation.net)}</strong></div>
+      <button type="button" class="print-action focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onclick={() => window.print()}>Print / Save PDF</button>
       <button type="button" class="reset focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onclick={() => { basicPay = 0; allowances = 0; deductions = 0; }}>Clear amounts</button>
     </aside>
+  </section>
+
+  <section class="print-sheet" aria-labelledby="print-title">
+    <div class="print-topline">
+      <p class="print-eyebrow">Sikkim Salary Calculator · Independent preview</p>
+      <span class="print-status">Manual inputs only</span>
+    </div>
+    <h1 id="print-title">{statement.title}</h1>
+    <p class="print-lead">Itemized monthly calculation using amounts manually entered by the user.</p>
+    <dl class="print-breakdown">
+      {#each statement.lines as line (line.id)}
+        <div class:print-total={line.emphasis} class:print-deduction={line.deduction}>
+          <dt>{line.label}</dt>
+          <dd>{line.deduction ? '− ' : ''}{money(line.amount)}</dd>
+        </div>
+      {/each}
+    </dl>
+    <p class="print-disclaimer"><strong>Important:</strong> {statement.disclaimer}</p>
+    <p class="print-footer">This independent preview is not affiliated with the Government of Sikkim. Check all amounts against official payroll records.</p>
   </section>
 
   <section class="next" aria-labelledby="next-title">
@@ -133,8 +155,11 @@
   .breakdown .total span { color: white; }
   .net-row { align-items: center; margin-top: 18px; font-weight: 700; }
   .net-row strong { font-size: 18px; }
-  .reset { align-self: flex-start; margin-top: auto; padding: 10px 0 0; border: 0; background: none; color: #c5ddd3; font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .print-action { align-self: flex-start; margin-top: 22px; padding: 10px 13px; border: 1px solid #b8cec5; border-radius: 9px; color: #173b34; background: white; font-size: 12px; font-weight: 750; cursor: pointer; }
+  .print-action:hover { background: #edf4f0; }
+  .reset { align-self: flex-start; margin-top: 12px; padding: 10px 0 0; border: 0; background: none; color: #c5ddd3; font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
   .reset:hover { color: white; }
+  .print-sheet { display: none; }
   .next { max-width: 700px; padding: 48px 0 36px; }
   .next h2 { color: #173b34; }
   .next p:not(.eyebrow) { color: #5b6d66; }
@@ -142,4 +167,25 @@
   footer { display: flex; justify-content: space-between; gap: 12px; padding: 20px 0 28px; border-top: 1px solid #dfe7e2; color: #829087; font-size: 11px; }
   @media (max-width: 720px) { .intro { padding-top: 38px; } .calculator { grid-template-columns: 1fr; } .result-panel { min-height: 410px; } footer { flex-direction: column; } }
   @media (max-width: 420px) { .shell { width: calc(100% - 24px); } .brand { font-size: 13px; } .mark { width: 34px; height: 34px; } .status { font-size: 10px; } .desktop-break { display: none; } }
+  @media print {
+    @page { margin: 18mm; }
+    :global(body) { margin: 0; background: white !important; color: #111 !important; font-size: 12pt; }
+    .shell { width: 100%; margin: 0; }
+    .topbar, .intro, .preview-note, .calculator, .next, footer { display: none !important; }
+    .print-sheet { display: block !important; color: #111 !important; }
+    .print-topline { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid #888; }
+    .print-eyebrow { margin: 0; color: #444; font-size: 10pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .print-status { padding: 4px 8px; border: 1px solid #777; border-radius: 4px; font-size: 9pt; white-space: nowrap; }
+    .print-sheet h1 { margin: 20px 0 6px; color: #111; font-size: 24pt; line-height: 1.1; letter-spacing: -.02em; }
+    .print-lead { margin: 0 0 20px; color: #444; }
+    .print-breakdown { display: grid; margin: 0; padding: 0; border-top: 1px solid #bbb; border-bottom: 1px solid #bbb; }
+    .print-breakdown div { display: flex; justify-content: space-between; gap: 20px; padding: 10px 0; border-bottom: 1px solid #ddd; }
+    .print-breakdown div:last-child { border-bottom: 0; }
+    .print-breakdown dt { color: #333; }
+    .print-breakdown dd { margin: 0; color: #111; font-variant-numeric: tabular-nums; font-weight: 650; text-align: right; white-space: nowrap; }
+    .print-breakdown .print-total { border-top: 1px solid #888; font-weight: 750; }
+    .print-breakdown .print-total dd { font-weight: 750; }
+    .print-disclaimer { margin: 24px 0 0; padding: 12px; border: 1px solid #888; color: #222; }
+    .print-footer { margin: 18px 0 0; padding-top: 12px; border-top: 1px solid #ccc; color: #555; font-size: 9pt; }
+  }
 </style>
