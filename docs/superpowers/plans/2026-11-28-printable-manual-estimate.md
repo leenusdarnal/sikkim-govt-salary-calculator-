@@ -1,6 +1,6 @@
 # Printable Manual Estimate Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Let users print or save the existing manual arithmetic estimate as a clear, self-contained document without presenting it as an official salary statement.
 
@@ -38,10 +38,10 @@
 - Consumes a normalized salary calculation object with `basicPay`, `allowances`, `gross`, `deductions`, and `net`.
 - Produces `{ title, disclaimer, lines }`; each line has a stable id, label, amount, and optional emphasis/deduction marker.
 
-- [ ] Write failing tests for the statement labels, values, and manual-only disclaimer.
-- [ ] Run the new test and confirm it fails because the module is not implemented.
-- [ ] Implement the pure statement model.
-- [ ] Run the statement tests and all existing calculation tests.
+- [x] Write failing tests for the statement labels, values, and manual-only disclaimer.
+- [x] Run the new test and confirm it fails because the module is not implemented.
+- [x] Implement the pure statement model.
+- [x] Run the statement tests and all existing calculation tests.
 
 ### Task 2: Printable UI and docs
 
@@ -54,8 +54,16 @@
 - The page derives the statement model from the existing `calculateSalary()` result.
 - A visible button calls `window.print()`; a print-only section renders the model.
 
-- [ ] Add the print/save button and print-only statement.
-- [ ] Add print CSS that hides non-statement content and formats a monochrome document.
-- [ ] Update the README's install instructions and remove the stale lockfile-workflow note.
-- [ ] Mark the completed lockfile work in the roadmap and distinguish this interim print view from the full source-backed statement requirement.
-- [ ] Run type-check, tests, audit, and production build through GitHub Actions.
+- [x] Add the print/save button and print-only statement.
+- [x] Add print CSS that hides non-statement content and formats a monochrome document.
+- [x] Update the README's install instructions and remove the stale lockfile-workflow note.
+- [x] Mark the completed lockfile work in the roadmap and distinguish this interim print view from the full source-backed statement requirement.
+- [x] Run type-check, tests, audit, and production build through GitHub Actions.
+
+
+## Execution notes
+
+- The initial statement-model tests were observed failing before the implementation was added, then passed once the model existed.
+- Added explicit validity checks after review so negative and non-finite input values cannot be printed as normalized zero amounts.
+- The TypeScript test lookup uses an existence assertion before accessing the deductions line.
+- Final GitHub Actions validation passed: `npm run check`, `npm test`, `npm audit --audit-level=high`, and `npm run build`.
