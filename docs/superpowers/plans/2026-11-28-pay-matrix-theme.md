@@ -1,6 +1,6 @@
 # Pay Matrix Lookup and Theme Modes Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Add a source-traceable lookup for all 23 Gazette Part A pay levels and cells, plus a persistent light/dark mode without adding runtime dependencies.
 
@@ -45,11 +45,11 @@
 - `resolveTheme(savedTheme, systemTheme): 'light' | 'dark'`
 - `nextTheme(currentTheme): 'light' | 'dark'`
 
-- [ ] Add tests for all 23 Level metadata records, actual cell counts, representative matrix values, and invalid lookup requests.
-- [ ] Add tests for saved/system theme resolution and toggling.
-- [ ] Run tests and confirm they fail because the modules do not exist.
-- [ ] Implement the small metadata-driven matrix generator and pure theme helpers.
-- [ ] Run all tests.
+- [x] Add tests for all 23 Level metadata records, actual cell counts, representative matrix values, and invalid lookup requests.
+- [x] Add tests for saved/system theme resolution and toggling.
+- [x] Run tests and confirm they fail because the modules do not exist.
+- [x] Implement the small metadata-driven matrix generator and pure theme helpers.
+- [x] Run all tests.
 
 ### Task 2: Theme switch
 
@@ -62,10 +62,10 @@
 - The header button toggles light/dark and stores the explicit selection.
 - The toggle uses inline SVG sun/moon icons with an accessible name and pressed state.
 
-- [ ] Add the early theme bootstrap and `color-scheme` meta declaration.
-- [ ] Add a small theme button and on-mount/toggle synchronization.
-- [ ] Add light/dark surface, text, border, field, note and focus styling without adding dependencies.
-- [ ] Verify print output remains monochrome.
+- [x] Add the early theme bootstrap and `color-scheme` meta declaration.
+- [x] Add a small theme button and on-mount/toggle synchronization.
+- [x] Add light/dark surface, text, border, field, note and focus styling without adding dependencies.
+- [x] Verify print output remains monochrome.
 
 ### Task 3: Matrix lookup UI and documentation
 
@@ -77,11 +77,20 @@
 
 **Interfaces:**
 - User selects a Level and a valid cell, then can apply the selected amount to the existing basic-pay input.
-- The source note identifies Gazette No. 333, Schedule Part A, and the 3% increment/nearest ₹100 progression.
+- The source note identifies Gazette No. 333, Schedule Part A, the 3% increment/nearest ₹100 progression, and the outstanding independent cell-by-cell audit.
 
-- [ ] Add a responsive Level/cell selector and an explicit “Use selected basic pay” action.
-- [ ] Preserve manual input and zero/negative validation behavior.
-- [ ] Document the matrix generation method, source references, and current verification scope accurately.
-- [ ] Update roadmap to mark the matrix lookup milestone complete, not the full rules-backed salary engine.
-- [ ] Run Svelte/TypeScript checks, all tests, dependency audit, and production build.
-- [ ] Review the diff and open a PR; merge only after green CI.
+- [x] Add a responsive Level/cell selector and an explicit “Use selected basic pay” action.
+- [x] Preserve manual input and zero/negative validation behavior.
+- [x] Document the matrix generation method, source references, and current verification scope accurately.
+- [x] Update roadmap to mark the matrix lookup milestone complete, not the full rules-backed salary engine.
+- [x] Run Svelte/TypeScript checks, all tests, dependency audit, and production build.
+- [x] Review the diff and open a PR; merge only after green CI.
+
+
+## Execution notes
+
+- The initial CI run failed at the expected test-first stage because the new matrix and theme modules were not yet present.
+- Added the source metadata and matrix generation logic, then fixed strict TypeScript annotations and optional lookup assertions identified by CI.
+- Corrected the source-specific cell counts for Levels 15–20 and added terminal-cell assertions across all 23 Levels.
+- Theme bootstrap runs before first paint; the toggle persists explicit choices, and the page follows system changes until a choice is pinned.
+- Final verification is tracked by the latest pull-request CI run. The separate full cell-by-cell independent audit and employee applicability review remain pending in Phase 0.
